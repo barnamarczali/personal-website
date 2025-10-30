@@ -8,12 +8,13 @@ const socials = [
   { name: 'linkedin', url: 'https://linkedin.com/in/barnamarczali' },
   { name: 'x', url: 'https://x.com/barnamarczali' },
   { name: 'email', url: 'mailto:marczali.barna@gmail.com' },
-  { name: 'threads', url: 'https://threads.net/@barnamarczali' },
+  { name: 'discord', url: 'https://discord.com/users/189419600000188416' },
 ];
 
 const menuItems = [
   { name: 'about me', id: 'about' },
   { name: 'my projects', id: 'projects' },
+  { name: 'writing', id: 'writing' },
   { name: 'music', id: 'music' },
   { name: 'contact', id: 'contact' },
 ];
@@ -21,21 +22,27 @@ const menuItems = [
 const CONTENT_VIEWS = {
   about: () => (
     <div>
-      <h2 className="text-2xl font-light mb-4">About Me</h2>
+      <h2 className="text-2xl font-light text-brand-accent mb-4">whoami?</h2>
       <p className="text-lg font-light leading-relaxed mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        hi! i'm barna marczali, a builder, tech enthusiast, and entrepreneur on the east-coast of the usa, 
+        studying computer science and economics at johns hopkins university. my countless interests include startups, 
+        ai, ml, web dev ui/ux, fintech, music, football–the real one ;)–and more.
       </p>
       <p className="text-lg font-light leading-relaxed mb-4">
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        always looking for new challenges and opportunities to learn and grow, i am determined to make a positive impact 
+        on the world with social-consumer technology that will make the difference. currently building 
+        <a href="https://www.dayli.social" className="text-brand-accent hover:text-brand-accent/80 transition-colors" target="_blank" rel="noopener noreferrer"> dayli</a>
       </p>
       <p className="text-lg font-light leading-relaxed">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        so welcome to my site, i hope you find it–and what i do–useful! please feel free to reach out on any of the platforms 
+        if you think we can learn together, build something cool, or just to chat! i love to connect with anyone interested in similar or 
+        completely different fields :)
       </p>
     </div>
   ),
   projects: () => (
     <div>
-      <h2 className="text-2xl font-light mb-4">My Projects</h2>
+      <h2 className="text-2xl font-light text-brand-accent mb-4">my projects</h2>
       <p className="text-lg font-light leading-relaxed mb-4">
         Here are some of the projects I've been working on. Each project represents a unique challenge and learning opportunity.
       </p>
@@ -61,9 +68,16 @@ const CONTENT_VIEWS = {
       </div>
     </div>
   ),
+  writing: () => (
+    <div>
+      <p className="text-lg font-light leading-relaxed mb-4 text-center">
+        coming soon...
+      </p>
+    </div>
+  ),
   music: () => (
     <div>
-      <h2 className="text-2xl font-light mb-4">Music</h2>
+      <h2 className="text-2xl font-light text-brand-accent mb-4">music</h2>
       <p className="text-lg font-light leading-relaxed mb-4">
         Music has always been an integral part of my life. Here's a glimpse into my musical journey and the genres that inspire me.
       </p>
@@ -77,7 +91,7 @@ const CONTENT_VIEWS = {
   ),
   contact: () => (
     <div>
-      <h2 className="text-2xl font-light mb-4">Contact</h2>
+      <h2 className="text-2xl font-light text-brand-accent mb-4">contact</h2>
       <p className="text-lg font-light leading-relaxed mb-6">
         I'd love to hear from you! Feel free to reach out through any of the social links below, or send me an email directly.
       </p>
@@ -237,7 +251,7 @@ export default function Page() {
               <button
                 key={item.id}
                 onClick={() => handleMenuClick(item.id)}
-                className={`text-left text-lg font-light transition-colors duration-300 cursor-pointer bg-transparent border-none p-0 ${
+                className={`text-left text-lg font-light transition-colors duration-0 cursor-pointer bg-transparent border-none p-0 ${
                   currentView === item.id
                     ? 'text-brand-accent'
                     : 'text-brand-text hover:text-brand-accent'
