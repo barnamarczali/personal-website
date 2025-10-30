@@ -153,9 +153,9 @@ export default function Page() {
   return (
     <ClickSpark
       sparkColor="#E58F65"
-      sparkSize={12}
-      sparkRadius={20}
-      sparkCount={8}
+      sparkSize={9}
+      sparkRadius={18}
+      sparkCount={7}
       duration={500}
     >
       <main className="min-h-screen relative overflow-hidden">
