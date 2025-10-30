@@ -170,13 +170,13 @@ export default function Page() {
           <div className="flex flex-col items-start -translate-x-8 -translate-y-12">
             <button
               onClick={handleExpand}
-              className="flex items-center gap-3 group mb-6 cursor-pointer bg-transparent border-none p-0"
+              className="flex items-center gap-2 group mb-6 cursor-pointer bg-transparent border-none p-0"
             >
               <h1 className="text-3xl md:text-3xl lg:text-4xl font-light text-brand-text group-hover:text-brand-accent transition-colors duration-300">
                 barna marczali
               </h1>
               <svg
-                className="w-8 h-8 text-brand-text group-hover:text-brand-accent transition-colors duration-300"
+                className="w-8 h-8 text-brand-text group-hover:text-brand-accent transition-all duration-300 translate-y-0.5 group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
