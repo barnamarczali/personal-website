@@ -18,3 +18,89 @@ html, body {
   box-sizing: border-box;
 }
 
+.page-content-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-content-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.page-content-current {
+  position: relative;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Scroll down animations (going forward in menu: 0->1, 1->2, etc.) */
+/* Both old and new content move UP (same direction) */
+.page-content-enter-down {
+  animation: page-content-enter-down 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-fill-mode: both;
+}
+
+.page-content-exit-down {
+  animation: page-content-exit-down 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-fill-mode: both;
+}
+
+/* Scroll up animations (going backward in menu: 1->0, 2->1, etc.) */
+/* Both old and new content move DOWN (same direction) */
+.page-content-enter-up {
+  animation: page-content-enter-up 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-fill-mode: both;
+}
+
+.page-content-exit-up {
+  animation: page-content-exit-up 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-fill-mode: both;
+}
+
+@keyframes page-content-enter-down {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-content-exit-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes page-content-enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-content-exit-up {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
