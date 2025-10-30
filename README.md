@@ -1,6 +1,6 @@
 # Personal Website
 
-Minimalist personal website for Barna Marczali.
+personal website of Barna Marczali
 
 ## Tech Stack
 
