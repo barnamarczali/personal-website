@@ -89,9 +89,60 @@ const AboutContent = () => {
 
       <div className="section-content">
         <h2 className="text-2xl font-light text-brand-accent mb-4">skills</h2>
-        <p className="text-lg font-light leading-relaxed mb-8">
-          [Placeholder for skills information]
-        </p>
+        <div className="space-y-6 mb-8">
+          <div className="flex flex-wrap gap-2">
+            {['react', 'next.js', 'html', 'css', 'java', 'javascript', 'python', 'pytorch', 'c/c++', 'sql', 'r', 'solidity', 'solidworks'].map((skill) => (
+              <span
+                key={skill}
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+                style={{
+                  backgroundColor: 'rgba(229, 143, 101, 0.15)',
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {['financial analysis', 'algorithmic trading', 'quantconnect'].map((skill) => (
+              <span
+                key={skill}
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+                style={{
+                  backgroundColor: 'rgba(107, 114, 128, 0.15)',
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {['hungarian', 'english', 'spanish', 'hebrew'].map((skill) => (
+              <span
+                key={skill}
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+                style={{
+                  backgroundColor: 'rgba(147, 197, 253, 0.15)',
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {['electric guitar', 'acoustic guitar', 'flamenco guitar', 'salsa'].map((skill) => (
+              <span
+                key={skill}
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+                style={{
+                  backgroundColor: 'rgba(252, 211, 77, 0.15)',
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="section-content">
@@ -138,7 +189,7 @@ const CONTENT_VIEWS = {
     <div>
       <div className="flex items-center mb-4">
         <p className="text-lg font-light leading-relaxed">
-          coming soon...
+          still typing...
         </p>
         <div className="ml-2 relative inline-block animate-spin" style={{ width: '1.4rem', height: '1.4rem', animationDuration: '1s' }}>
           <img 
