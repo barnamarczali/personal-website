@@ -91,55 +91,115 @@ const AboutContent = () => {
         <h2 className="text-2xl font-light text-brand-accent mb-4">skills</h2>
         <div className="space-y-6 mb-8">
           <div className="flex flex-wrap gap-2">
-            {['react', 'next.js', 'html', 'css', 'java', 'javascript', 'python', 'pytorch', 'c/c++', 'sql', 'r', 'solidity', 'solidworks'].map((skill) => (
-              <span
-                key={skill}
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+            {[
+              { name: 'react', url: 'https://en.wikipedia.org/wiki/React_(software)' },
+              { name: 'next.js', url: 'https://en.wikipedia.org/wiki/Next.js' },
+              { name: 'html', url: 'https://en.wikipedia.org/wiki/HTML' },
+              { name: 'css', url: 'https://en.wikipedia.org/wiki/CSS' },
+              { name: 'java', url: 'https://en.wikipedia.org/wiki/Java_(programming_language)' },
+              { name: 'javascript', url: 'https://en.wikipedia.org/wiki/JavaScript' },
+              { name: 'python', url: 'https://en.wikipedia.org/wiki/Python_(programming_language)' },
+              { name: 'pytorch', url: 'https://en.wikipedia.org/wiki/PyTorch' },
+              { name: 'c/c++', url: 'https://en.wikipedia.org/wiki/C%2B%2B' },
+              { name: 'sql', url: 'https://en.wikipedia.org/wiki/SQL' },
+              { name: 'r', url: 'https://en.wikipedia.org/wiki/R_(programming_language)' },
+              { name: 'solidity', url: 'https://en.wikipedia.org/wiki/Solidity' },
+              { name: 'solidworks', url: 'https://en.wikipedia.org/wiki/SolidWorks' },
+            ].map((skill) => (
+              <a
+                key={skill.name}
+                href={skill.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(229, 143, 101, 0.15)',
                 }}
               >
-                {skill}
-              </span>
+                {skill.name}
+              </a>
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
-            {['financial analysis', 'algorithmic trading', 'quantconnect'].map((skill) => (
-              <span
-                key={skill}
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+            {[
+              { name: 'financial analysis', url: 'https://en.wikipedia.org/wiki/Financial_analysis' },
+              { name: 'algorithmic trading', url: 'https://en.wikipedia.org/wiki/Algorithmic_trading' },
+              { name: 'quantconnect', url: 'https://en.wikipedia.org/wiki/QuantConnect' },
+            ].map((skill) => (
+              <a
+                key={skill.name}
+                href={skill.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(107, 114, 128, 0.15)',
                 }}
               >
-                {skill}
-              </span>
+                {skill.name}
+              </a>
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
-            {['hungarian', 'english', 'spanish', 'hebrew'].map((skill) => (
-              <span
-                key={skill}
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+            {[
+              { name: 'hungarian', url: 'https://en.wikipedia.org/wiki/Hungarian_language' },
+              { name: 'english', url: 'https://en.wikipedia.org/wiki/English_language' },
+              { name: 'spanish', url: 'https://en.wikipedia.org/wiki/Spanish_language' },
+              { name: 'hebrew', url: 'https://en.wikipedia.org/wiki/Hebrew_language' },
+            ].map((skill) => (
+              <a
+                key={skill.name}
+                href={skill.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(147, 197, 253, 0.15)',
                 }}
               >
-                {skill}
-              </span>
+                {skill.name}
+              </a>
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
-            {['electric guitar', 'acoustic guitar', 'flamenco guitar', 'salsa'].map((skill) => (
-              <span
-                key={skill}
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed"
+            {[
+              { name: 'electric guitar', url: 'https://en.wikipedia.org/wiki/Electric_guitar' },
+              { name: 'acoustic guitar', url: 'https://en.wikipedia.org/wiki/Acoustic_guitar' },
+              { name: 'flamenco guitar', url: 'https://en.wikipedia.org/wiki/Flamenco_guitar' },
+              { name: 'salsa', url: 'https://en.wikipedia.org/wiki/Salsa_(dance)' },
+            ].map((skill) => (
+              <a
+                key={skill.name}
+                href={skill.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(252, 211, 77, 0.15)',
                 }}
               >
-                {skill}
-              </span>
+                {skill.name}
+              </a>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { name: 'football', url: 'https://en.wikipedia.org/wiki/Association_football' },
+              { name: 'tennis', url: 'https://en.wikipedia.org/wiki/Tennis' },
+              { name: 'scuba diving', url: 'https://en.wikipedia.org/wiki/Scuba_diving' },
+            ].map((skill) => (
+              <a
+                key={skill.name}
+                href={skill.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+                style={{
+                  backgroundColor: 'rgba(134, 239, 172, 0.15)',
+                }}
+              >
+                {skill.name}
+              </a>
             ))}
           </div>
         </div>
