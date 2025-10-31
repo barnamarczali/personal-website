@@ -12,6 +12,9 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: 'barna marczali',
   description: 'personal website',
+  icons: {
+    icon: '/git_pfp_favicon.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

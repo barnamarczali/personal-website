@@ -22,7 +22,14 @@ const menuItems = [
 const CONTENT_VIEWS = {
   about: () => (
     <div>
-      <h2 className="text-2xl font-light text-brand-accent mb-4">whoami?</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-light text-brand-accent">whoami?</h2>
+        <img 
+          src="/git_pfp.png" 
+          alt="Barna Marczali" 
+          className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover relative z-0"
+        />
+      </div>
       <p className="text-lg font-light leading-relaxed mb-4">
         hi! i'm barna marczali, a builder, tech enthusiast, and entrepreneur on the east-coast of the usa, 
         studying computer science and economics at johns hopkins university. my countless interests include startups, 
@@ -70,9 +77,38 @@ const CONTENT_VIEWS = {
   ),
   writing: () => (
     <div>
-      <p className="text-lg font-light leading-relaxed mb-4 text-center">
-        coming soon...
-      </p>
+      <div className="flex items-center mb-4">
+        <p className="text-lg font-light leading-relaxed">
+          coming soon...
+        </p>
+        <div className="ml-2 relative inline-block animate-spin" style={{ width: '1.4rem', height: '1.4rem', animationDuration: '1s' }}>
+          <img 
+            src="/beachball.svg" 
+            alt="loading" 
+            decoding="async"
+            data-nimg="intrinsic"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              boxSizing: 'border-box',
+              padding: 0,
+              border: 'none',
+              margin: 'auto',
+              display: 'block',
+              width: 0,
+              height: 0,
+              minWidth: '100%',
+              maxWidth: '100%',
+              minHeight: '100%',
+              maxHeight: '100%'
+            }}
+            srcSet="/beachball.svg 1x, /beachball.svg 2x"
+          />
+        </div>
+      </div>
     </div>
   ),
   music: () => (
