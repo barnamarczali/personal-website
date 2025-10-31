@@ -50,9 +50,34 @@ const AboutContent = () => {
 
       <div className="section-content">
         <h2 className="text-2xl font-light text-brand-accent mb-4">education</h2>
-        <p className="text-lg font-light leading-relaxed mb-8">
-          [Placeholder for education information]
-        </p>
+        <div className="space-y-8 mb-12">
+          <div className="flex items-center gap-4">
+            <img 
+              src="/jhu.png" 
+              alt="Johns Hopkins University" 
+              className="h-12 w-12 object-contain"
+              style={{
+                filter: 'brightness(0) invert(1)',
+                opacity: 0.95
+              }}
+            />
+            <p className="text-lg font-light leading-relaxed">
+              computer science & economics [at] johns hopkins university <br />
+              [2023-2027]
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <img 
+              src="/nus.png" 
+              alt="National University of Singapore" 
+              className="h-12 w-12 object-contain"
+            />
+            <p className="text-lg font-light leading-relaxed">
+              engineering exchange [at] national university of singapore <br />
+              [2025]
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="section-content">
