@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${manrope.variable} font-sans min-h-screen bg-brand-bg text-brand-text`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
