@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'barna marczali',
   description: 'personal website',
   icons: {
-    icon: '/git_pfp_favicon.png',
+    icon: '/personal_favicon.png',
   },
 };
 

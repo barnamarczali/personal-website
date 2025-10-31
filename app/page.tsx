@@ -19,34 +19,68 @@ const menuItems = [
   { name: 'contact', id: 'contact' },
 ];
 
-const CONTENT_VIEWS = {
-  about: () => (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-light text-brand-accent">whoami?</h2>
-        <img 
-          src="/git_pfp.png" 
-          alt="Barna Marczali" 
-          className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover relative z-0"
-        />
+const AboutContent = () => {
+  return (
+    <div className="about-content-wrapper">
+      <div className="section-content">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-light text-brand-accent">whoami?</h2>
+          <img 
+            src="/git_pfp.png" 
+            alt="barna marczali" 
+            className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover relative z-0"
+          />
+        </div>
+        <p className="text-lg font-light leading-relaxed mb-4">
+          hi! i'm barna marczali, a builder, tech enthusiast, and entrepreneur on the east-coast of the usa, 
+          studying computer science and economics at johns hopkins university. my countless interests include startups, 
+          ai, ml, web dev ui/ux, fintech, music, football–the real one ;)–and more.
+        </p>
+        <p className="text-lg font-light leading-relaxed mb-4">
+          always looking for new challenges and opportunities to learn and grow, i am determined to make a positive impact 
+          on the world with social-consumer technology that will make the difference. currently building 
+          <a href="https://www.dayli.social" className="text-brand-accent hover:text-brand-accent/80 transition-colors" target="_blank" rel="noopener noreferrer"> dayli</a>
+        </p>
+        <p className="text-lg font-light leading-relaxed mb-8">
+          so welcome to my site, i hope you find it–and what i do–useful! please feel free to reach out on any of the platforms 
+          if you think we can learn together, build something cool, or just to chat! i love to connect with anyone interested in similar or 
+          completely different fields :)
+        </p>
       </div>
-      <p className="text-lg font-light leading-relaxed mb-4">
-        hi! i'm barna marczali, a builder, tech enthusiast, and entrepreneur on the east-coast of the usa, 
-        studying computer science and economics at johns hopkins university. my countless interests include startups, 
-        ai, ml, web dev ui/ux, fintech, music, football–the real one ;)–and more.
-      </p>
-      <p className="text-lg font-light leading-relaxed mb-4">
-        always looking for new challenges and opportunities to learn and grow, i am determined to make a positive impact 
-        on the world with social-consumer technology that will make the difference. currently building 
-        <a href="https://www.dayli.social" className="text-brand-accent hover:text-brand-accent/80 transition-colors" target="_blank" rel="noopener noreferrer"> dayli</a>
-      </p>
-      <p className="text-lg font-light leading-relaxed">
-        so welcome to my site, i hope you find it–and what i do–useful! please feel free to reach out on any of the platforms 
-        if you think we can learn together, build something cool, or just to chat! i love to connect with anyone interested in similar or 
-        completely different fields :)
-      </p>
+
+      <div className="section-content">
+        <h2 className="text-2xl font-light text-brand-accent mb-4">education</h2>
+        <p className="text-lg font-light leading-relaxed mb-8">
+          [Placeholder for education information]
+        </p>
+      </div>
+
+      <div className="section-content">
+        <h2 className="text-2xl font-light text-brand-accent mb-4">experience</h2>
+        <p className="text-lg font-light leading-relaxed mb-8">
+          [Placeholder for experience information]
+        </p>
+      </div>
+
+      <div className="section-content">
+        <h2 className="text-2xl font-light text-brand-accent mb-4">skills</h2>
+        <p className="text-lg font-light leading-relaxed mb-8">
+          [Placeholder for skills information]
+        </p>
+      </div>
+
+      <div className="section-content">
+        <h2 className="text-2xl font-light text-brand-accent mb-4">interests</h2>
+        <p className="text-lg font-light leading-relaxed mb-8">
+          [Placeholder for interests information]
+        </p>
+      </div>
     </div>
-  ),
+  );
+};
+
+const CONTENT_VIEWS = {
+  about: () => <AboutContent />,
   projects: () => (
     <div>
       <h2 className="text-2xl font-light text-brand-accent mb-4">my projects</h2>
@@ -208,10 +242,10 @@ export default function Page() {
       sparkCount={7}
       duration={500}
     >
-      <main className="min-h-screen relative overflow-hidden">
+      <main className="min-h-screen relative overflow-y-auto">
         {/* Initial centered view */}
         <div
-          className={`absolute inset-0 flex items-center justify-center p-4 transition-opacity duration-[330ms] ${
+          className={`absolute inset-0 flex items-center justify-center p-4 transition-opacity duration-[330ms] z-30 ${
             isExpanded
               ? 'opacity-0 pointer-events-none'
               : 'opacity-100'
@@ -265,7 +299,7 @@ export default function Page() {
         >
           {/* Header with name */}
           <div
-            className={`absolute top-8 left-8 transition-all duration-[520ms] delay-[130ms] z-20 ${
+            className={`fixed top-8 left-8 transition-all duration-[520ms] delay-[130ms] z-20 ${
               isExpanded ? 'translate-x-0 translate-y-0 scale-100 opacity-100' : 'translate-x-[calc(50vw-2rem)] translate-y-[calc(50vh-2rem)] scale-[0.3] opacity-0'
             }`}
             style={{
@@ -279,7 +313,7 @@ export default function Page() {
 
           {/* Menu items */}
           <nav
-            className={`absolute top-24 left-8 flex flex-col gap-4 transition-all duration-[520ms] delay-[195ms] z-20 ${
+            className={`fixed top-24 left-8 flex flex-col gap-4 transition-all duration-[520ms] delay-[195ms] z-20 ${
               isExpanded ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
             }`}
           >
@@ -304,11 +338,19 @@ export default function Page() {
 
           {/* Main content */}
           <div
-            className={`absolute inset-0 flex items-center justify-center px-8 md:px-16 lg:px-32 transition-all duration-[520ms] delay-[325ms] z-10 pointer-events-none ${
+            className={`${
+              currentView === 'about' 
+                ? 'w-full' 
+                : 'absolute inset-0 flex items-center justify-center px-8 md:px-16 lg:px-32 pointer-events-none'
+            } transition-all duration-[520ms] delay-[325ms] z-10 ${
               isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
           >
-            <div className="relative max-w-2xl text-brand-text pointer-events-auto page-content-wrapper">
+            <div className={`relative ${
+              currentView === 'about' 
+                ? 'w-full' 
+                : 'max-w-2xl w-full h-full flex items-center justify-center page-content-wrapper'
+            } text-brand-text ${currentView === 'about' ? '' : 'pointer-events-auto'}`}>
               {/* Previous content (exiting) */}
               {PreviousContent && (
                 <div
@@ -333,9 +375,9 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Social links at bottom */}
+          {/* Social links at bottom - fixed footer */}
           <nav
-            className={`absolute bottom-8 left-0 right-0 flex justify-center gap-8 md:gap-12 transition-all duration-[520ms] delay-[260ms] z-20 ${
+            className={`fixed bottom-8 left-0 right-0 flex justify-center gap-8 md:gap-12 transition-all duration-[520ms] delay-[260ms] z-20 ${
               isExpanded ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-[calc(-50vh+2rem)] scale-[0.3] opacity-0'
             }`}
             style={{

@@ -14,6 +14,25 @@ html, body {
   color: var(--brand-text);
 }
 
+/* Custom scrollbar on the right side */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-accent) transparent;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--brand-accent);
+  border-radius: 4px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -21,6 +40,24 @@ html, body {
 .page-content-wrapper {
   position: relative;
   overflow: hidden;
+}
+
+/* Allow scrolling for about page content */
+.about-content-wrapper {
+  width: 100%;
+  padding: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.section-content {
+  position: relative;
+  padding: 3rem 0;
+  width: 100%;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .page-content-layer {
