@@ -294,6 +294,7 @@ export default function Page() {
                 }`}
                 style={{
                   transitionDelay: `${195 + index * 39}ms`,
+                  transitionProperty: 'opacity, transform',
                 }}
               >
                 {item.name}

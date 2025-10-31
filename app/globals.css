@@ -104,3 +104,14 @@ html, body {
   }
 }
 
+/* Ensure nav menu items have instant hover color transitions */
+nav button {
+  transition-property: color;
+  transition-duration: 0ms;
+  transition-delay: 0ms;
+}
+
+nav button:hover {
+  transition-delay: 0ms !important;
+}
+
