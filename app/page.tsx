@@ -96,9 +96,169 @@ const AboutContent = () => {
 
       <div className="section-content">
         <h2 className="text-2xl font-light text-brand-accent mb-4">experience</h2>
-        <p className="text-lg font-light leading-relaxed mb-8">
-          [Placeholder for experience information]
-        </p>
+        <div className="relative mb-12 -ml-2">
+          {/* Continuous vertical line */}
+          <div className="absolute left-[3.8rem] top-0 bottom-0 w-px bg-brand-accent/30"></div>
+          
+          {/* Timeline entries */}
+          <div className="space-y-0">
+            {/* 2025 - Startup Founder */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2025</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  co-founder, cto/coo at dayli <span className="text-brand-text/60">(baltimore, md)</span>
+                </p>
+              </div>
+            </div>
+            
+            {/* 2025 - VC Intern */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2025</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  summer vc intern at day1 capital <span className="text-brand-text/60">(budapest, hungary)</span>
+                </p>
+              </div>
+            </div>
+            
+            {/* 2025 - Johns Hopkins Algorithmic Trading Club */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2025</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  co-founder & developer at johns hopkins algorithmic trading club <span className="text-brand-text/60">(baltimore, md)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2024 - Startup Founder */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2024</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  co-founder, cto at spark.ai <span className="text-brand-text/60">(baltimore, md)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2024 - JHU Sports Analytics */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2024</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  python developer at johns hopkins sports analytics research group <span className="text-brand-text/60">(baltimore, md)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2024 - AMA @ JHU */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2024</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  vice president of consulting & board member at american marketing association @ jhu - nest strategies consulting <span className="text-brand-text/60">(baltimore, md)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2023 - JHU Economics Club */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2023</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  team lead, leader assistant & board member at johns hopkins university economics club <span className="text-brand-text/60">(baltimore, md)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2022 - ASP Group */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2022</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  private equity associate intern at asp group <span className="text-brand-text/60">(vienna, austria)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2022 - Enpulsion */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2022</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  marketing intern at enpulsion gmbh <span className="text-brand-text/60">(vienna, austria)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2021 - Milestone Business Society */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2021</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  co-founder & president at milestone business society <span className="text-brand-text/60">(budapest, hungary)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2021 - Tesztallomas.hu */}
+            <div className="flex gap-2 items-start pb-8">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2021</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  co-creator at tesztallomas.hu <span className="text-brand-text/60">(budapest, hungary)</span>
+                </p>
+              </div>
+            </div>
+
+            {/* 2020 - Urban AI Parking Assistant */}
+            <div className="flex gap-2 items-start">
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2020</span>
+              <div className="relative flex items-start pt-[0.55rem]">
+                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+              </div>
+              <div className="flex-1 pt-0">
+                <p className="text-lg font-light leading-relaxed">
+                  co-founder at urban ai parking assistant <span className="text-brand-text/60">(budapest, hungary)</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="section-content">
