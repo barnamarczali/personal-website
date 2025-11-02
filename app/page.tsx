@@ -251,6 +251,12 @@ const AboutContent = () => {
               {interest.name}
             </a>
           ))}
+          <div className="w-full">
+            <div className="h-6 md:h-6" />
+            <p className="text-lg font-light leading-relaxed">
+              if you share any of these interests or found my site useful, feel free to reach out!
+            </p>
+          </div>
         </div>
       </div>
     </div>
