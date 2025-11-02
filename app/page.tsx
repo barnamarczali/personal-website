@@ -21,7 +21,7 @@ const menuItems = [
 
 const AboutContent = () => {
   return (
-    <div className="about-content-wrapper">
+    <div className="about-content-wrapper relative">
       <div className="section-content">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-light text-brand-accent">whoami?</h2>
@@ -52,26 +52,40 @@ const AboutContent = () => {
         <h2 className="text-2xl font-light text-brand-accent mb-4">education</h2>
         <div className="space-y-8 mb-12">
           <div className="flex items-center gap-4">
-            <img 
-              src="/jhu.png" 
-              alt="Johns Hopkins University" 
-              className="h-12 w-12 object-contain"
-              style={{
-                filter: 'brightness(0) invert(1)',
-                opacity: 0.95
-              }}
-            />
+            <a 
+              href="https://en.wikipedia.org/wiki/Johns_Hopkins_University"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/jhu.png" 
+                alt="Johns Hopkins University" 
+                className="h-12 w-12 object-contain"
+                style={{
+                  filter: 'brightness(0) invert(1)',
+                  opacity: 0.95
+                }}
+              />
+            </a>
             <p className="text-lg font-light leading-relaxed">
               computer science & economics [at] johns hopkins university <br />
               [2023-2027]
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <img 
-              src="/nus.png" 
-              alt="National University of Singapore" 
-              className="h-12 w-12 object-contain"
-            />
+            <a 
+              href="https://en.wikipedia.org/wiki/National_University_of_Singapore"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/nus.png" 
+                alt="National University of Singapore" 
+                className="h-12 w-12 object-contain"
+              />
+            </a>
             <p className="text-lg font-light leading-relaxed">
               engineering exchange [at] national university of singapore <br />
               [2025]
@@ -207,9 +221,37 @@ const AboutContent = () => {
 
       <div className="section-content">
         <h2 className="text-2xl font-light text-brand-accent mb-4">interests</h2>
-        <p className="text-lg font-light leading-relaxed mb-8">
-          [Placeholder for interests information]
-        </p>
+        <div className="flex flex-wrap gap-2.5 mb-24">
+          {[
+            { name: 'startups', url: 'https://en.wikipedia.org/wiki/Startup_company' },
+            { name: 'chess', url: 'https://en.wikipedia.org/wiki/Chess' },
+            { name: 'ai', url: 'https://en.wikipedia.org/wiki/Artificial_intelligence' },
+            { name: 'ml', url: 'https://en.wikipedia.org/wiki/Machine_learning' },
+            { name: 'social entrepreneurship', url: 'https://en.wikipedia.org/wiki/Social_entrepreneurship' },
+            { name: 'mixing', url: 'https://en.wikipedia.org/wiki/Audio_mixing' },
+            { name: 'padel', url: 'https://en.wikipedia.org/wiki/Padel' },
+            { name: 'cooking', url: 'https://en.wikipedia.org/wiki/Cooking' },
+            { name: 'spy-fictions', url: 'https://en.wikipedia.org/wiki/Spy_fiction' },
+            { name: 'classics', url: 'https://en.wikipedia.org/wiki/Classic_book' },
+            { name: 'defense/security tech', url: 'https://en.wikipedia.org/wiki/Defense_technology' },
+            { name: 'consumer tech', url: 'https://en.wikipedia.org/wiki/Consumer_electronics' },
+            { name: 'robotics', url: 'https://en.wikipedia.org/wiki/Robotics' },
+            { name: 'writing', url: 'https://en.wikipedia.org/wiki/Writing' },
+          ].map((interest) => (
+            <a
+              key={interest.name}
+              href={interest.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1 rounded-md text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+              style={{
+                backgroundColor: 'rgba(229, 143, 101, 0.12)',
+              }}
+            >
+              {interest.name}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
