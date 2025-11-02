@@ -219,9 +219,9 @@ const AboutContent = () => {
               </div>
             </div>
 
-            {/* 2021 - Milestone Business Society */}
+            {/* 2022 - Milestone Business Society */}
             <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2021</span>
+              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2022</span>
               <div className="relative flex items-start pt-[0.55rem]">
                 <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
