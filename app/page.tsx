@@ -427,28 +427,145 @@ const CONTENT_VIEWS = {
   about: () => <AboutContent />,
   projects: () => (
     <div>
-      <h2 className="text-2xl font-light text-brand-accent mb-4">my projects</h2>
-      <p className="text-lg font-light leading-relaxed mb-4">
-        Here are some of the projects I've been working on. Each project represents a unique challenge and learning opportunity.
-      </p>
-      <div className="space-y-6">
-        <div>
-          <h3 className="text-xl font-light mb-2 text-brand-accent">Project One</h3>
-          <p className="text-base font-light leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
-          </p>
+      <h2 className="text-2xl font-light text-brand-accent mb-4">some things i've built...</h2>
+      <div className="space-y-4">
+        {/* dayli.social */}
+        <div 
+          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
+        >
+          <div className="flex-1">
+            <h3 className="text-xl font-light mb-1 text-brand-accent">dayli</h3>
+            <p className="text-base font-light leading-relaxed mb-2">
+              a social app to help everyone not lose their friends and people who are important to them, 
+              and to encourage real connection in a world where everyone is so preocccupied with work, "social" 
+              media, and the other millions of distractions
+            </p>
+          </div>
+          <a
+            href="https://www.dayli.social"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            title="Visit website"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
         </div>
-        <div>
-          <h3 className="text-xl font-light mb-2 text-brand-accent">Project Two</h3>
-          <p className="text-base font-light leading-relaxed">
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+
+        {/* personal website */}
+        <div 
+          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
+        >
+          <div className="flex-1">
+            <h3 className="text-xl font-light mb-1 text-brand-accent">personal website</h3>
+            <p className="text-base font-light leading-relaxed mb-2">
+              this very site :) let me know how to improve it!
+            </p>
+          </div>
+          <a
+            href="https://github.com/barnamarczali/personal-website"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            title="View on GitHub"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+          </a>
         </div>
-        <div>
-          <h3 className="text-xl font-light mb-2 text-brand-accent">Project Three</h3>
-          <p className="text-base font-light leading-relaxed">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          </p>
+
+        {/* i-know-where-you-live */}
+        <div 
+          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
+        >
+          <div className="flex-1">
+            <h3 className="text-xl font-light mb-1 text-brand-accent">terminail</h3>
+            <p className="text-base font-light leading-relaxed mb-2">
+              osint profiling tool built for the cursor hackathon singapore where you can look up anyone and get a detailed profile built 
+              on them based on publicly available information on the internet
+            </p>
+          </div>
+          <a
+            href="https://github.com/budaic/i-know-where-you-live"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            title="View on GitHub"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+          </a>
+        </div>
+
+        {/* usespark.ai */}
+        <div 
+          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
+        >
+          <div className="flex-1">
+            <h3 className="text-xl font-light mb-1 text-brand-accent">spark.ai</h3>
+            <p className="text-base font-light leading-relaxed mb-2">
+              an ai-powered "online yc" platform to guide founders from idea to mvp
+            </p>
+          </div>
+          <a
+            href="https://www.usespark.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            title="Visit website"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+
+        {/* bridgewayworld.com */}
+        <div 
+          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
+        >
+          <div className="flex-1">
+            <h3 className="text-xl font-light mb-1 text-brand-accent">bridgeway world</h3>
+            <p className="text-base font-light leading-relaxed mb-2">
+              building a community in higher education based on mentorship, collaboration, and professional opportunities
+            </p>
+          </div>
+          <a
+            href="https://www.bridgewayworld.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            title="Visit website"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+
+        {/* algorithmic trading services */}
+        <div 
+          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300"
+          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
+        >
+          <div className="flex-1">
+            <h3 className="text-xl font-light mb-1 text-brand-accent">algorithmic trading services</h3>
+            <p className="text-base font-light leading-relaxed mb-2">
+              algorithmic trading strategies as a service
+            </p>
+          </div>
+          <div className="text-brand-text/40 flex-shrink-0 mt-1 text-sm font-light">
+            coming soon...
+          </div>
         </div>
       </div>
     </div>
