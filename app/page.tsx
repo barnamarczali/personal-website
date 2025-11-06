@@ -485,7 +485,7 @@ const CONTENT_VIEWS = {
           style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
         >
           <div className="flex-1">
-            <h3 className="text-xl font-light mb-1 text-brand-accent">terminail</h3>
+            <h3 className="text-xl font-light mb-1 text-brand-accent">i know where you live / terminail</h3>
             <p className="text-base font-light leading-relaxed mb-2">
               osint profiling tool built for the cursor hackathon singapore where you can look up anyone and get a detailed profile built 
               on them based on publicly available information on the internet
@@ -608,45 +608,98 @@ const CONTENT_VIEWS = {
   ),
   music: () => (
     <div>
-      <h2 className="text-2xl font-light text-brand-accent mb-4">music</h2>
-      <p className="text-lg font-light leading-relaxed mb-4">
-        Music has always been an integral part of my life. Here's a glimpse into my musical journey and the genres that inspire me.
+      <h2 className="text-2xl font-light text-brand-accent mb-4">just listen</h2>
+      <p className="text-lg font-light leading-relaxed mb-6">
+        music has always been very important to me and i think it is essential that we stop and just listen to it every once in a while. 
+        here, i try to curate some recommendations, display my playlists, and hopefully share some of my own music in the future.
       </p>
-      <p className="text-lg font-light leading-relaxed mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
-      <p className="text-lg font-light leading-relaxed">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-      </p>
+      
+      {/* Playlists */}
+      <div className="flex flex-wrap gap-4 mb-8">
+        {[
+          { emoji: '🏠', title: 'house', url: 'https://music.apple.com/hu/playlist/pl.u-zPyLLRXFZJ2pYz9' },
+          { emoji: '🍸', title: 'bar', url: 'https://music.apple.com/hu/playlist/pl.u-4Jomm9DIav1Z5B2' },
+          { emoji: '🎶', title: 'scores', url: 'https://music.apple.com/hu/playlist/scores/pl.u-zPyLmjRtZJ2pYz9' },
+          { emoji: '🇭🇺', title: 'hungarian', url: 'https://music.apple.com/hu/playlist/pl.u-pMyllkMc4zkZl8a' },
+          { emoji: '🇮🇹', title: 'italian', url: 'https://music.apple.com/hu/playlist/pl.u-qxylK7BT2PxRBzY' },
+          { emoji: '🎸', title: 'rock', url: 'https://music.apple.com/hu/playlist/pl.u-qxylK7BT2PxRBzY' },
+          { emoji: '🎼', title: 'classical', url: 'https://music.apple.com/hu/playlist/class/pl.u-qxylKqDI2PxRBzY' },
+          { emoji: '🥃', title: 'golden', url: 'https://music.apple.com/hu/playlist/pl.u-XkD04XpHDzLBqVb' },
+          { emoji: '🎷', title: '(some) jazz', url: 'https://music.apple.com/hu/playlist/pl.u-zPyLm03TZJ2pYz9' },
+          { emoji: '🦇', title: '(some) opera', url: 'https://music.apple.com/hu/playlist/opera/pl.u-qxylK46t2PxRBzY' },
+        ].map((playlist, index) => (
+          <div key={index} className="group flex flex-col items-center w-[48px]">
+            <a
+              href={playlist.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-3xl hover:scale-110 transition-transform duration-200 inline-block"
+            >
+              {playlist.emoji}
+            </a>
+            <span className="mt-2 text-sm font-light text-brand-text text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+              {playlist.title}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Music Profile Links */}
+      <div className="flex justify-center gap-8">
+        {/* Apple Music */}
+        <div className="group relative">
+          <a
+            href="https://music.apple.com/profile/barnamarczali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:scale-110 transition-transform duration-200 block"
+          >
+            <img 
+              src="/Apple_Music_icon.svg.png" 
+              alt="Apple Music Profile" 
+              className="h-8 w-8 object-contain"
+            />
+          </a>
+          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-base font-light text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+            follow me for more
+          </span>
+        </div>
+
+        {/* SoundCloud */}
+        <div className="group relative">
+          <a
+            href="https://on.soundcloud.com/yb21Ek8VYdppd2MFGM"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:scale-110 transition-transform duration-200 block"
+          >
+            <img 
+              src="/soundcloud.png" 
+              alt="SoundCloud Profile" 
+              className="h-8 w-8 object-contain"
+            />
+          </a>
+          <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-base font-light text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+            give me recs on soundcloud
+          </span>
+        </div>
+      </div>
     </div>
   ),
   contact: () => (
     <div>
-      <h2 className="text-2xl font-light text-brand-accent mb-4">contact</h2>
+      <h2 className="text-2xl font-light text-brand-accent mb-4">reach out!</h2>
       <p className="text-lg font-light leading-relaxed mb-6">
-        I'd love to hear from you! Feel free to reach out through any of the social links below, or send me an email directly.
+        if you are thinking about reaching out, just do it! about anything, anytime, anywhere
       </p>
       <div className="space-y-4">
         <div>
-          <h3 className="text-xl font-light mb-2 text-brand-accent">Email</h3>
           <a 
             href="mailto:marczali.barna@gmail.com"
-            className="text-base font-light leading-relaxed hover:text-brand-accent transition-colors duration-300"
+            className="text-base font-light leading-relaxed hover:underline"
           >
             marczali.barna@gmail.com
           </a>
-        </div>
-        <div>
-          <h3 className="text-xl font-light mb-2 text-brand-accent">Social Media</h3>
-          <p className="text-base font-light leading-relaxed">
-            Connect with me on GitHub, LinkedIn, X, or Threads. You'll find all the links at the bottom of the page.
-          </p>
-        </div>
-        <div>
-          <h3 className="text-xl font-light mb-2 text-brand-accent">Availability</h3>
-          <p className="text-base font-light leading-relaxed">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          </p>
         </div>
       </div>
     </div>
