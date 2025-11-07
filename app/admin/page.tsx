@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ClickSpark from '@/components/ClickSpark';
 
 interface Recommendation {
   type: string;
@@ -25,6 +26,8 @@ export default function AdminPage() {
   const [currentSong, setCurrentSong] = useState({ title: '', url: '' });
   const [editingSong, setEditingSong] = useState(false);
   const [songUpdateSuccess, setSongUpdateSuccess] = useState(false);
+  const [titleFocused, setTitleFocused] = useState(false);
+  const [urlFocused, setUrlFocused] = useState(false);
 
   useEffect(() => {
     // Check if already authenticated in session storage
@@ -171,7 +174,14 @@ export default function AdminPage() {
   // Login form
   if (!isAuthenticated) {
     return (
-      <main className="min-h-screen p-8 flex items-center justify-center">
+      <ClickSpark
+        sparkColor="#E58F65"
+        sparkSize={9}
+        sparkRadius={18}
+        sparkCount={7}
+        duration={500}
+      >
+        <main className="min-h-screen p-8 flex items-center justify-center">
         <div className="max-w-md w-full">
           <h1 className="text-3xl font-light text-brand-text mb-8 text-center">
             admin login
@@ -236,12 +246,20 @@ export default function AdminPage() {
           </form>
         </div>
       </main>
+      </ClickSpark>
     );
   }
 
   if (loading) {
     return (
-      <main className="min-h-screen p-8">
+      <ClickSpark
+        sparkColor="#E58F65"
+        sparkSize={9}
+        sparkRadius={18}
+        sparkCount={7}
+        duration={500}
+      >
+        <main className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-light text-brand-text mb-8">
             admin dashboard
@@ -249,12 +267,20 @@ export default function AdminPage() {
           <p className="text-lg font-light text-brand-text">loading...</p>
         </div>
       </main>
+      </ClickSpark>
     );
   }
 
   if (error) {
     return (
-      <main className="min-h-screen p-8">
+      <ClickSpark
+        sparkColor="#E58F65"
+        sparkSize={9}
+        sparkRadius={18}
+        sparkCount={7}
+        duration={500}
+      >
+        <main className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-light text-brand-text mb-8">
             recommendations admin
@@ -265,17 +291,39 @@ export default function AdminPage() {
           </p>
           <button
             onClick={fetchRecommendations}
-            className="mt-4 px-4 py-2 bg-brand-accent text-brand-bg rounded-md hover:opacity-80 transition-opacity"
+            className="group flex items-center gap-2 text-brand-text hover:text-brand-accent transition-colors duration-300 font-light text-lg mt-4"
           >
-            try again
+            <span>try again</span>
+            <svg
+              className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
           </button>
         </div>
       </main>
+      </ClickSpark>
     );
   }
 
   return (
-    <main className="min-h-screen p-8">
+    <ClickSpark
+      sparkColor="#E58F65"
+      sparkSize={9}
+      sparkRadius={18}
+      sparkCount={7}
+      duration={500}
+    >
+      <main className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-light text-brand-text">
@@ -305,51 +353,77 @@ export default function AdminPage() {
 
         {/* Current Song Editor */}
         <div className="mb-12 p-6 rounded-lg" style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}>
-          <h2 className="text-2xl font-light text-brand-accent mb-4">
+          <h2 className="text-2xl font-light text-brand-accent mb-6">
             currently listening to
           </h2>
-          <form onSubmit={handleUpdateCurrentSong} className="space-y-4">
-            <div>
-              <label htmlFor="songTitle" className="block text-sm font-light text-brand-text/80 mb-2">
-                song title
-              </label>
+          <form onSubmit={handleUpdateCurrentSong} className="space-y-6">
+            <div className="relative">
               <input
                 id="songTitle"
                 type="text"
                 value={currentSong.title}
                 onChange={(e) => setCurrentSong({ ...currentSong, title: e.target.value })}
-                placeholder="Enter song title"
+                onFocus={() => setTitleFocused(true)}
+                onBlur={() => setTitleFocused(false)}
+                placeholder="song title"
                 required
-                className="w-full bg-brand-bg border border-brand-text/20 rounded px-3 py-2 text-brand-text font-light outline-none focus:border-brand-accent transition-colors"
+                className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
+                  titleFocused
+                    ? 'text-brand-accent placeholder:text-brand-accent/50'
+                    : 'text-brand-text placeholder:text-brand-text/50'
+                }`}
                 style={{ caretColor: '#E58F65' }}
               />
+              <div className={`absolute bottom-0 left-0 right-0 h-[1px] transition-colors duration-300 ${
+                titleFocused ? 'bg-brand-accent' : 'bg-brand-text'
+              }`}></div>
             </div>
-            <div>
-              <label htmlFor="songUrl" className="block text-sm font-light text-brand-text/80 mb-2">
-                song url
-              </label>
+            <div className="relative">
               <input
                 id="songUrl"
                 type="url"
                 value={currentSong.url}
                 onChange={(e) => setCurrentSong({ ...currentSong, url: e.target.value })}
-                placeholder="Enter song URL (e.g., Spotify, Apple Music link)"
+                onFocus={() => setUrlFocused(true)}
+                onBlur={() => setUrlFocused(false)}
+                placeholder="song url (spotify, apple music, etc.)"
                 required
-                className="w-full bg-brand-bg border border-brand-text/20 rounded px-3 py-2 text-brand-text font-light outline-none focus:border-brand-accent transition-colors"
+                className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
+                  urlFocused
+                    ? 'text-brand-accent placeholder:text-brand-accent/50'
+                    : 'text-brand-text placeholder:text-brand-text/50'
+                }`}
                 style={{ caretColor: '#E58F65' }}
               />
+              <div className={`absolute bottom-0 left-0 right-0 h-[1px] transition-colors duration-300 ${
+                urlFocused ? 'bg-brand-accent' : 'bg-brand-text'
+              }`}></div>
             </div>
             <div className="flex items-center gap-4">
               <button
                 type="submit"
                 disabled={editingSong}
-                className="px-6 py-2 bg-brand-accent text-brand-bg rounded-md hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed font-light"
+                className="group flex items-center gap-2 text-brand-text hover:text-brand-accent transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed font-light text-lg"
               >
-                {editingSong ? 'updating...' : 'update song'}
+                <span>{editingSong ? 'updating...' : 'update song'}</span>
+                <svg
+                  className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
               </button>
               {songUpdateSuccess && (
-                <span className="text-green-400 font-light text-sm">
-                  successfully updated!
+                <span className="text-brand-accent font-light text-sm">
+                  updated successfully!
                 </span>
               )}
             </div>
@@ -372,6 +446,7 @@ export default function AdminPage() {
         />
       </div>
     </main>
+    </ClickSpark>
   );
 }
 
