@@ -142,26 +142,26 @@ export default function AdminPage() {
     title: string; 
     recommendations: Recommendation[];
   }) => (
-    <div className="mb-8">
-      <h2 className="text-2xl font-light text-brand-accent mb-4">
+    <div className="mb-6 md:mb-8">
+      <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-3 md:mb-4">
         {title} ({recommendations.length})
       </h2>
       {recommendations.length === 0 ? (
-        <p className="text-brand-text/60 text-lg font-light">
+        <p className="text-brand-text/60 text-base md:text-lg font-light">
           no {title.toLowerCase()} yet
         </p>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2 md:space-y-3">
           {recommendations.map((rec, index) => (
             <div
               key={`${rec.timestamp}-${index}`}
-              className="p-4 rounded-lg"
+              className="p-3 md:p-4 rounded-lg"
               style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
             >
-              <p className="text-lg font-light text-brand-text mb-2">
+              <p className="text-base md:text-lg font-light text-brand-text mb-1 md:mb-2 break-words">
                 {rec.content}
               </p>
-              <p className="text-sm font-light text-brand-text/60">
+              <p className="text-xs md:text-sm font-light text-brand-text/60">
                 {formatDate(rec.date)}
               </p>
             </div>
@@ -181,9 +181,9 @@ export default function AdminPage() {
         sparkCount={7}
         duration={500}
       >
-        <main className="min-h-screen p-8 flex items-center justify-center">
+        <main className="min-h-screen p-4 md:p-8 flex items-center justify-center">
         <div className="max-w-md w-full">
-          <h1 className="text-3xl font-light text-brand-text mb-8 text-center">
+          <h1 className="text-2xl md:text-3xl font-light text-brand-text mb-6 md:mb-8 text-center">
             admin login
           </h1>
           <form onSubmit={handleLogin} className="space-y-4">
@@ -197,7 +197,7 @@ export default function AdminPage() {
                   onBlur={() => setIsFocused(false)}
                   placeholder="enter admin password"
                   disabled={isAuthenticating}
-                  className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
+                  className={`w-full bg-transparent text-base md:text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
                     isFocused
                       ? 'text-brand-accent placeholder:text-brand-accent/50'
                       : 'text-brand-text placeholder:text-brand-text/50'
@@ -219,7 +219,7 @@ export default function AdminPage() {
                 aria-label="Submit"
               >
                 <svg
-                  className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1"
+                  className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -235,11 +235,11 @@ export default function AdminPage() {
               </button>
             </div>
             {authError && (
-              <p className="text-red-400 text-sm font-light">{authError}</p>
+              <p className="text-red-400 text-xs md:text-sm font-light">{authError}</p>
             )}
             <a
               href="/"
-              className="block text-center text-brand-text hover:text-brand-accent transition-colors text-base font-light mt-4"
+              className="block text-center text-brand-text hover:text-brand-accent transition-colors text-sm md:text-base font-light mt-4"
             >
               back to site
             </a>
@@ -259,12 +259,12 @@ export default function AdminPage() {
         sparkCount={7}
         duration={500}
       >
-        <main className="min-h-screen p-8">
+        <main className="min-h-screen p-4 md:p-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-light text-brand-text mb-8">
+          <h1 className="text-2xl md:text-3xl font-light text-brand-text mb-6 md:mb-8">
             admin dashboard
           </h1>
-          <p className="text-lg font-light text-brand-text">loading...</p>
+          <p className="text-base md:text-lg font-light text-brand-text">loading...</p>
         </div>
       </main>
       </ClickSpark>
@@ -280,22 +280,22 @@ export default function AdminPage() {
         sparkCount={7}
         duration={500}
       >
-        <main className="min-h-screen p-8">
+        <main className="min-h-screen p-4 md:p-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-light text-brand-text mb-8">
-            recommendations admin
+          <h1 className="text-2xl md:text-3xl font-light text-brand-text mb-6 md:mb-8">
+            admin dashboard
           </h1>
-          <p className="text-lg font-light text-red-400 mb-4">{error}</p>
-          <p className="text-base font-light text-brand-text/80">
-            check the DATABASE_SETUP.md file for setup instructions.
+          <p className="text-base md:text-lg font-light text-red-400 mb-4">{error}</p>
+          <p className="text-sm md:text-base font-light text-brand-text/80">
+            check the README.md file for setup instructions.
           </p>
           <button
             onClick={fetchRecommendations}
-            className="group flex items-center gap-2 text-brand-text hover:text-brand-accent transition-colors duration-300 font-light text-lg mt-4"
+            className="group flex items-center gap-2 text-brand-text hover:text-brand-accent transition-colors duration-300 font-light text-base md:text-lg mt-4"
           >
             <span>try again</span>
             <svg
-              className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1"
+              className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -323,28 +323,28 @@ export default function AdminPage() {
       sparkCount={7}
       duration={500}
     >
-      <main className="min-h-screen p-8">
+      <main className="min-h-screen p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-light text-brand-text">
-            recommendations admin
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-8 gap-4">
+          <h1 className="text-2xl md:text-3xl font-light text-brand-text">
+            admin dashboard
           </h1>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3 md:gap-4">
             <button
               onClick={fetchRecommendations}
-              className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
+              className="px-3 py-1.5 md:px-4 md:py-2 text-brand-text hover:text-brand-accent transition-colors text-sm md:text-base font-light"
             >
               refresh
             </button>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
+              className="px-3 py-1.5 md:px-4 md:py-2 text-brand-text hover:text-brand-accent transition-colors text-sm md:text-base font-light"
             >
               logout
             </button>
             <a
               href="/"
-              className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
+              className="px-3 py-1.5 md:px-4 md:py-2 text-brand-text hover:text-brand-accent transition-colors text-sm md:text-base font-light"
             >
               back to site
             </a>
@@ -352,11 +352,11 @@ export default function AdminPage() {
         </div>
 
         {/* Current Song Editor */}
-        <div className="mb-12 p-6 rounded-lg" style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}>
-          <h2 className="text-2xl font-light text-brand-accent mb-6">
+        <div className="mb-8 md:mb-12 p-4 md:p-6 rounded-lg" style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}>
+          <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4 md:mb-6">
             currently listening to
           </h2>
-          <form onSubmit={handleUpdateCurrentSong} className="space-y-6">
+          <form onSubmit={handleUpdateCurrentSong} className="space-y-4 md:space-y-6">
             <div className="relative">
               <input
                 id="songTitle"
@@ -367,7 +367,7 @@ export default function AdminPage() {
                 onBlur={() => setTitleFocused(false)}
                 placeholder="song title"
                 required
-                className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
+                className={`w-full bg-transparent text-base md:text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
                   titleFocused
                     ? 'text-brand-accent placeholder:text-brand-accent/50'
                     : 'text-brand-text placeholder:text-brand-text/50'
@@ -388,7 +388,7 @@ export default function AdminPage() {
                 onBlur={() => setUrlFocused(false)}
                 placeholder="song url (spotify, apple music, etc.)"
                 required
-                className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
+                className={`w-full bg-transparent text-base md:text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
                   urlFocused
                     ? 'text-brand-accent placeholder:text-brand-accent/50'
                     : 'text-brand-text placeholder:text-brand-text/50'
@@ -399,15 +399,15 @@ export default function AdminPage() {
                 urlFocused ? 'bg-brand-accent' : 'bg-brand-text'
               }`}></div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 md:gap-4">
               <button
                 type="submit"
                 disabled={editingSong}
-                className="group flex items-center gap-2 text-brand-text hover:text-brand-accent transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed font-light text-lg"
+                className="group flex items-center gap-2 text-brand-text hover:text-brand-accent transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed font-light text-base md:text-lg"
               >
                 <span>{editingSong ? 'updating...' : 'update song'}</span>
                 <svg
-                  className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1"
+                  className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -422,7 +422,7 @@ export default function AdminPage() {
                 </svg>
               </button>
               {songUpdateSuccess && (
-                <span className="text-brand-accent font-light text-sm">
+                <span className="text-brand-accent font-light text-xs md:text-sm">
                   updated successfully!
                 </span>
               )}
