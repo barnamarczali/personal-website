@@ -1,27 +1,27 @@
 # Database Setup Guide
 
-This site uses **Vercel KV** (Redis) to store recommendations. Follow these simple steps to set it up:
+This site uses **Redis** to store recommendations. Follow these simple steps to set it up:
 
 ## Setup Steps
 
-### 1. Install Vercel KV in Your Project
+### 1. Add Redis to Your Vercel Project
 
-The package is already installed in this project, but when you deploy to Vercel, you need to enable KV:
+The package is already installed in this project. To enable Redis in Vercel:
 
 1. Go to your project on [Vercel Dashboard](https://vercel.com/dashboard)
 2. Select your project
 3. Go to the **Storage** tab
 4. Click **Create Database**
-5. Select **KV Database**
-6. Give it a name (e.g., "personal-website-kv")
+5. Select **Redis** (Upstash Redis)
+6. Give it a name (e.g., "personal-website-redis")
 7. Click **Create**
 
 ### 2. Connect to Your Project
 
-After creating the KV database:
+After creating the Redis database:
 
-1. Vercel will automatically connect it to your project
-2. The required environment variables will be added automatically
+1. Vercel will automatically add the `REDIS_URL` environment variable
+2. The environment variable will be in the format: `redis://default:password@host:port`
 3. Redeploy your site (Vercel will prompt you to do this)
 
 ### 3. Local Development (Optional)
@@ -38,7 +38,7 @@ If you want to test locally with a real database:
    npm run dev
    ```
 
-Alternatively, for local testing without setting up KV, the API will fail gracefully and you can add mock responses.
+Alternatively, for local testing without setting up Redis, the API will fail gracefully.
 
 ## How It Works
 
@@ -72,30 +72,27 @@ Each recommendation is stored with:
 
 To view the recommendations people have submitted:
 
-1. Create a simple admin page (optional), or
-2. Use the Vercel KV dashboard:
-   - Go to Storage → Your KV Database
+1. Visit `/admin` on your site to see all submissions
+2. Or use the Vercel Redis dashboard:
+   - Go to Storage → Your Redis Database
    - Click "Data Browser"
    - Search for keys like `recommendations:song` or `recommendations:writing`
 
 ## Cost
 
-Vercel KV has a generous free tier:
+Upstash Redis on Vercel has a generous free tier:
+- 10,000 commands per day
 - 256MB storage
-- 3000 commands per day
 
 This is more than enough for a personal website collecting recommendations!
 
 ## Troubleshooting
 
 If recommendations aren't saving:
-1. Check that KV is properly connected in Vercel Dashboard
+1. Check that Redis is properly connected in Vercel Dashboard
 2. Check the browser console for errors
-3. Verify environment variables are set (in Vercel Dashboard → Settings → Environment Variables)
+3. Verify the `REDIS_URL` environment variable is set (in Vercel Dashboard → Settings → Environment Variables)
 
-The required environment variables (automatically added by Vercel):
-- `KV_URL`
-- `KV_REST_API_URL`
-- `KV_REST_API_TOKEN`
-- `KV_REST_API_READ_ONLY_TOKEN`
+The required environment variable (automatically added by Vercel):
+- `REDIS_URL` - Redis connection URL in format: `redis://default:password@host:port`
 

@@ -8,7 +8,7 @@ personal website of Barna Marczali
 - TypeScript
 - Tailwind CSS
 - React 18
-- Vercel KV (Redis database)
+- Redis (Serverless Redis on Vercel)
 
 ## Features
 
@@ -30,7 +30,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Database Setup
 
-The site uses Vercel KV for storing recommendations. See `DATABASE_SETUP.md` for detailed setup instructions.
+The site uses Redis (on Vercel) for storing recommendations. See `DATABASE_SETUP.md` for detailed setup instructions.
+
 
 For local development without database:
 ```bash

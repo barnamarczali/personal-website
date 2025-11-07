@@ -1,8 +1,26 @@
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 import { NextRequest, NextResponse } from 'next/server';
+
+// Create Redis client
+const redis = createClient({
+  url: process.env.REDIS_URL,
+});
+
+redis.on('error', (err) => console.error('Redis Client Error', err));
+
+// Connect to Redis (singleton pattern)
+let isConnected = false;
+async function connectRedis() {
+  if (!isConnected) {
+    await redis.connect();
+    isConnected = true;
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
+    await connectRedis();
+    
     const body = await request.json();
     const { type, content } = body;
 
@@ -26,15 +44,17 @@ export async function POST(request: NextRequest) {
     const key = `recommendation:${type}:${timestamp}`;
 
     // Store the recommendation with metadata
-    await kv.set(key, {
+    const data = JSON.stringify({
       type,
       content,
       timestamp,
       date: new Date().toISOString(),
     });
 
+    await redis.set(key, data);
+
     // Also add to a list for easy retrieval
-    await kv.lpush(`recommendations:${type}`, key);
+    await redis.lPush(`recommendations:${type}`, key);
 
     return NextResponse.json({
       success: true,
@@ -51,6 +71,8 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    await connectRedis();
+    
     const searchParams = request.nextUrl.searchParams;
     const type = searchParams.get('type');
 
@@ -62,9 +84,12 @@ export async function GET(request: NextRequest) {
     }
 
     // Get all recommendations of this type
-    const keys = await kv.lrange(`recommendations:${type}`, 0, -1);
+    const keys = await redis.lRange(`recommendations:${type}`, 0, -1);
     const recommendations = await Promise.all(
-      keys.map(async (key) => await kv.get(key))
+      keys.map(async (key) => {
+        const data = await redis.get(key);
+        return data ? JSON.parse(data) : null;
+      })
     );
 
     return NextResponse.json({
