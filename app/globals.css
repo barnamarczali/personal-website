@@ -39,7 +39,7 @@ body::-webkit-scrollbar-thumb {
 
 .page-content-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Allow scrolling for about page content */
@@ -181,5 +181,22 @@ nav button:hover {
   100% {
     opacity: 0;
     transform: translateY(-16px);
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  /* Adjust section content padding for mobile */
+  .section-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Ensure proper spacing for mobile content */
+  .about-content-wrapper {
+    padding-top: 0;
+    padding-bottom: 4rem; /* Extra padding at bottom to avoid social links */
   }
 }

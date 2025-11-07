@@ -25,24 +25,24 @@ const AboutContent = () => {
     <div className="about-content-wrapper relative">
       <div className="section-content">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-light text-brand-accent">whoami?</h2>
+          <h2 className="text-xl md:text-2xl font-light text-brand-accent">whoami?</h2>
           <img 
             src="/git_pfp.png" 
             alt="barna marczali" 
-            className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover relative z-0"
+            className="h-14 w-14 md:h-16 md:w-16 lg:h-20 lg:w-20 rounded-full object-cover relative z-0"
           />
         </div>
-        <p className="text-lg font-light leading-relaxed mb-4">
+        <p className="text-base md:text-lg font-light leading-relaxed mb-4">
           hi! i'm barna marczali, a builder, tech enthusiast, and entrepreneur on the east-coast of the usa, 
           studying computer science and economics at johns hopkins university. my countless interests include startups, 
           ai, ml, web dev ui/ux, fintech, music, football–the real one ;)–and more.
         </p>
-        <p className="text-lg font-light leading-relaxed mb-4">
+        <p className="text-base md:text-lg font-light leading-relaxed mb-4">
           always looking for new challenges and opportunities to learn and grow, i am determined to make a positive impact 
           on the world with social-consumer technology that will make the difference. currently building 
           <a href="https://www.dayli.social" className="text-brand-accent hover:text-brand-accent/80 transition-colors" target="_blank" rel="noopener noreferrer"> dayli</a>
         </p>
-        <p className="text-lg font-light leading-relaxed mb-8">
+        <p className="text-base md:text-lg font-light leading-relaxed mb-8">
           so welcome to my site, i hope you find it–and what i do–useful! please feel free to reach out on any of the platforms 
           if you think we can learn together, build something cool, or just to chat! i love to connect with anyone interested in similar or 
           completely different fields :)
@@ -50,7 +50,7 @@ const AboutContent = () => {
       </div>
 
       <div className="section-content">
-        <h2 className="text-2xl font-light text-brand-accent mb-4">education</h2>
+        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">education</h2>
         <div className="space-y-8 mb-12">
           <div className="flex items-center gap-4">
             <a 
@@ -69,7 +69,7 @@ const AboutContent = () => {
                 }}
               />
             </a>
-            <p className="text-lg font-light leading-relaxed">
+            <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
               computer science & economics [at] johns hopkins university <br />
               [2023-2027]
             </p>
@@ -87,7 +87,7 @@ const AboutContent = () => {
                 className="h-12 w-12 object-contain"
               />
             </a>
-            <p className="text-lg font-light leading-relaxed">
+            <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
               engineering exchange [at] national university of singapore <br />
               [2025]
             </p>
@@ -96,164 +96,164 @@ const AboutContent = () => {
       </div>
 
       <div className="section-content">
-        <h2 className="text-2xl font-light text-brand-accent mb-4">experience</h2>
-        <div className="relative mb-12 -ml-2">
+        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">experience</h2>
+        <div className="relative mb-12 -ml-1 md:-ml-2">
           {/* Continuous vertical line */}
-          <div className="absolute left-[3.8rem] top-0 bottom-0 w-px bg-brand-accent/30"></div>
+          <div className="absolute left-[3rem] md:left-[3.8rem] top-0 bottom-0 w-px bg-brand-accent/30"></div>
           
           {/* Timeline entries */}
           <div className="space-y-0">
             {/* 2025 - Startup Founder */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2025</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   co-founder, cto/coo at dayli <span className="text-brand-text/60">(baltimore, md)</span>
                 </p>
               </div>
             </div>
             
             {/* 2025 - VC Intern */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2025</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   summer vc intern at day1 capital <span className="text-brand-text/60">(budapest, hungary)</span>
                 </p>
               </div>
             </div>
             
             {/* 2025 - Johns Hopkins Algorithmic Trading Club */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2025</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   co-founder & developer at johns hopkins algorithmic trading club <span className="text-brand-text/60">(baltimore, md)</span>
                 </p>
               </div>
             </div>
 
             {/* 2024 - Startup Founder */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2024</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   co-founder, cto at spark.ai <span className="text-brand-text/60">(baltimore, md)</span>
                 </p>
               </div>
             </div>
 
             {/* 2024 - JHU Sports Analytics */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2024</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   python developer at johns hopkins sports analytics research group <span className="text-brand-text/60">(baltimore, md)</span>
                 </p>
               </div>
             </div>
 
             {/* 2024 - AMA @ JHU */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2024</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   vice president of consulting & board member at american marketing association @ jhu - nest strategies consulting <span className="text-brand-text/60">(baltimore, md)</span>
                 </p>
               </div>
             </div>
 
             {/* 2023 - JHU Economics Club */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2023</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2023</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   team lead, leader assistant & board member at johns hopkins university economics club <span className="text-brand-text/60">(baltimore, md)</span>
                 </p>
               </div>
             </div>
 
             {/* 2022 - ASP Group */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2022</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   private equity associate intern at asp group <span className="text-brand-text/60">(vienna, austria)</span>
                 </p>
               </div>
             </div>
 
             {/* 2022 - Enpulsion */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2022</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   marketing intern at enpulsion gmbh <span className="text-brand-text/60">(vienna, austria)</span>
                 </p>
               </div>
             </div>
 
             {/* 2022 - Milestone Business Society */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2022</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   co-founder & president at milestone business society <span className="text-brand-text/60">(budapest, hungary)</span>
                 </p>
               </div>
             </div>
 
             {/* 2021 - Tesztallomas.hu */}
-            <div className="flex gap-2 items-start pb-8">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2021</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start pb-8">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2021</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   co-creator at tesztallomas.hu <span className="text-brand-text/60">(budapest, hungary)</span>
                 </p>
               </div>
             </div>
 
             {/* 2020 - Urban AI Parking Assistant */}
-            <div className="flex gap-2 items-start">
-              <span className="text-lg font-light text-brand-text/60 whitespace-nowrap w-12 text-right">2020</span>
-              <div className="relative flex items-start pt-[0.55rem]">
-                <div className="w-3 h-3 rounded-full bg-brand-accent z-10"></div>
+            <div className="flex gap-1 md:gap-2 items-start">
+              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2020</span>
+              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
               </div>
               <div className="flex-1 pt-0">
-                <p className="text-lg font-light leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
                   co-founder at urban ai parking assistant <span className="text-brand-text/60">(budapest, hungary)</span>
                 </p>
               </div>
@@ -263,8 +263,8 @@ const AboutContent = () => {
       </div>
 
       <div className="section-content">
-        <h2 className="text-2xl font-light text-brand-accent mb-4">skills</h2>
-        <div className="space-y-6 mb-8">
+        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">skills</h2>
+        <div className="space-y-4 md:space-y-6 mb-8">
           <div className="flex flex-wrap gap-2">
             {[
               { name: 'react', url: 'https://en.wikipedia.org/wiki/React_(software)' },
@@ -286,7 +286,7 @@ const AboutContent = () => {
                 href={skill.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(229, 143, 101, 0.15)',
                 }}
@@ -306,7 +306,7 @@ const AboutContent = () => {
                 href={skill.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(107, 114, 128, 0.15)',
                 }}
@@ -327,7 +327,7 @@ const AboutContent = () => {
                 href={skill.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(147, 197, 253, 0.15)',
                 }}
@@ -348,7 +348,7 @@ const AboutContent = () => {
                 href={skill.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(252, 211, 77, 0.15)',
                 }}
@@ -368,7 +368,7 @@ const AboutContent = () => {
                 href={skill.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
                 style={{
                   backgroundColor: 'rgba(134, 239, 172, 0.15)',
                 }}
@@ -381,8 +381,8 @@ const AboutContent = () => {
       </div>
 
       <div className="section-content">
-        <h2 className="text-2xl font-light text-brand-accent mb-4">interests</h2>
-        <div className="flex flex-wrap gap-2.5 mb-24">
+        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">interests</h2>
+        <div className="flex flex-wrap gap-2 md:gap-2.5 mb-16 md:mb-24">
           {[
             { name: 'startups', url: 'https://en.wikipedia.org/wiki/Startup_company' },
             { name: 'chess', url: 'https://en.wikipedia.org/wiki/Chess' },
@@ -404,7 +404,7 @@ const AboutContent = () => {
               href={interest.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1 rounded-md text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
+              className="px-2.5 md:px-3 py-0.5 md:py-1 rounded-md text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
               style={{
                 backgroundColor: 'rgba(229, 143, 101, 0.12)',
               }}
@@ -413,8 +413,8 @@ const AboutContent = () => {
             </a>
           ))}
           <div className="w-full">
-            <div className="h-6 md:h-6" />
-            <p className="text-lg font-light leading-relaxed">
+            <div className="h-4 md:h-6" />
+            <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
               if you share any of these interests or found my site useful, feel free to reach out!
             </p>
           </div>
@@ -428,16 +428,16 @@ const CONTENT_VIEWS = {
   about: () => <AboutContent />,
   projects: () => (
     <div>
-      <h2 className="text-2xl font-light text-brand-accent mb-4">some things i've built...</h2>
-      <div className="space-y-4">
+      <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">some things i've built...</h2>
+      <div className="space-y-3 md:space-y-4">
         {/* dayli.social */}
         <div 
-          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
           style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
         >
-          <div className="flex-1">
-            <h3 className="text-xl font-light mb-1 text-brand-accent">dayli</h3>
-            <p className="text-base font-light leading-relaxed mb-2">
+          <div className="flex-1 w-full">
+            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">dayli</h3>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
               a social app to help everyone not lose their friends and people who are important to them, 
               and to encourage real connection in a world where everyone is so preocccupied with work, "social" 
               media, and the other millions of distractions
@@ -447,10 +447,10 @@ const CONTENT_VIEWS = {
             href="https://www.dayli.social"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
             title="Visit website"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
@@ -458,12 +458,12 @@ const CONTENT_VIEWS = {
 
         {/* personal website */}
         <div 
-          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
           style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
         >
-          <div className="flex-1">
-            <h3 className="text-xl font-light mb-1 text-brand-accent">personal website</h3>
-            <p className="text-base font-light leading-relaxed mb-2">
+          <div className="flex-1 w-full">
+            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">personal website</h3>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
               this very site :) let me know how to improve it!
             </p>
           </div>
@@ -471,10 +471,10 @@ const CONTENT_VIEWS = {
             href="https://github.com/barnamarczali/personal-website"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
             title="View on GitHub"
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
             </svg>
           </a>
@@ -482,12 +482,12 @@ const CONTENT_VIEWS = {
 
         {/* i-know-where-you-live */}
         <div 
-          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
           style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
         >
-          <div className="flex-1">
-            <h3 className="text-xl font-light mb-1 text-brand-accent">i know where you live / terminail</h3>
-            <p className="text-base font-light leading-relaxed mb-2">
+          <div className="flex-1 w-full">
+            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">i know where you live / terminail</h3>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
               osint profiling tool built for the cursor hackathon singapore where you can look up anyone and get a detailed profile built 
               on them based on publicly available information on the internet
             </p>
@@ -496,10 +496,10 @@ const CONTENT_VIEWS = {
             href="https://github.com/budaic/i-know-where-you-live"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
             title="View on GitHub"
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
             </svg>
           </a>
@@ -507,12 +507,12 @@ const CONTENT_VIEWS = {
 
         {/* usespark.ai */}
         <div 
-          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
           style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
         >
-          <div className="flex-1">
-            <h3 className="text-xl font-light mb-1 text-brand-accent">spark.ai</h3>
-            <p className="text-base font-light leading-relaxed mb-2">
+          <div className="flex-1 w-full">
+            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">spark.ai</h3>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
               an ai-powered "online yc" platform to guide founders from idea to mvp
             </p>
           </div>
@@ -520,10 +520,10 @@ const CONTENT_VIEWS = {
             href="https://www.usespark.ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
             title="Visit website"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
@@ -531,12 +531,12 @@ const CONTENT_VIEWS = {
 
         {/* bridgewayworld.com */}
         <div 
-          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
           style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
         >
-          <div className="flex-1">
-            <h3 className="text-xl font-light mb-1 text-brand-accent">bridgeway world</h3>
-            <p className="text-base font-light leading-relaxed mb-2">
+          <div className="flex-1 w-full">
+            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">bridgeway world</h3>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
               building a community in higher education based on mentorship, collaboration, and professional opportunities
             </p>
           </div>
@@ -544,10 +544,10 @@ const CONTENT_VIEWS = {
             href="https://www.bridgewayworld.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
             title="Visit website"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
@@ -555,16 +555,16 @@ const CONTENT_VIEWS = {
 
         {/* algorithmic trading services */}
         <div 
-          className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300"
+          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300"
           style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
         >
-          <div className="flex-1">
-            <h3 className="text-xl font-light mb-1 text-brand-accent">algorithmic trading services</h3>
-            <p className="text-base font-light leading-relaxed mb-2">
+          <div className="flex-1 w-full">
+            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">algorithmic trading services</h3>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
               algorithmic trading strategies as a service
             </p>
           </div>
-          <div className="text-brand-text/40 flex-shrink-0 mt-1 text-sm font-light">
+          <div className="text-brand-text/40 flex-shrink-0 mt-1 text-xs md:text-sm font-light self-end md:self-start">
             coming soon...
           </div>
         </div>
@@ -572,9 +572,9 @@ const CONTENT_VIEWS = {
     </div>
   ),
   writing: () => (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center w-full px-4 md:px-0">
       <div className="flex items-center justify-center mb-4">
-        <p className="text-lg font-light leading-relaxed">
+        <p className="text-base md:text-lg font-light leading-relaxed">
           still typing...
         </p>
         <div className="ml-2 relative inline-block animate-spin" style={{ width: '1.4rem', height: '1.4rem', animationDuration: '1s' }}>
@@ -607,21 +607,21 @@ const CONTENT_VIEWS = {
       </div>
 
       {/* Writing Request Input */}
-      <div style={{ width: '130%', maxWidth: '800px' }}>
+      <div style={{ width: '100%', minWidth: '250px', maxWidth: '400px' }}>
         <RecommendationInput placeholder="what should i write about next?" type="writing" width="full" />
       </div>
     </div>
   ),
   music: () => (
-    <div>
-      <h2 className="text-2xl font-light text-brand-accent mb-4">just listen</h2>
-      <p className="text-lg font-light leading-relaxed mb-6">
+    <div className="px-4 md:px-0">
+      <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">just listen</h2>
+      <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed mb-6">
         music has always been very important to me and i think it is essential that we stop and just listen to it every once in a while. 
         here, i try to curate some recommendations, display my playlists, and hopefully share some of my own music in the future.
       </p>
       
       {/* Playlists */}
-      <div className="flex flex-wrap gap-4 mb-8">
+      <div className="flex flex-wrap gap-3 md:gap-4 mb-8 justify-center md:justify-start">
         {[
           { emoji: '🏠', title: 'house', url: 'https://music.apple.com/hu/playlist/pl.u-zPyLLRXFZJ2pYz9' },
           { emoji: '🍸', title: 'bar', url: 'https://music.apple.com/hu/playlist/pl.u-4Jomm9DIav1Z5B2' },
@@ -700,14 +700,14 @@ const CONTENT_VIEWS = {
     </div>
   ),
   contact: () => (
-    <div>
-      <h2 className="text-2xl font-light text-brand-accent mb-4">reach out!</h2>
-      <p className="text-lg font-light leading-relaxed mb-6">
+    <div className="px-4 md:px-0">
+      <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">reach out!</h2>
+      <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed mb-6">
         if you are thinking about reaching out, just do it! about anything, anytime, anywhere
       </p>
       
       {/* Social logos */}
-      <div className="flex justify-center items-center gap-6 mb-8">
+      <div className="flex justify-center items-center gap-4 md:gap-6 mb-8">
         {/* GitHub */}
         <a
           href="https://github.com/barnamarczali"
@@ -820,19 +820,19 @@ const CONTENT_VIEWS = {
 
       {/* Email and Calendly with animated underlines */}
       <div className="space-y-4">
-        <div className="text-lg font-light leading-relaxed">
+        <div className="text-sm md:text-base lg:text-lg font-light leading-relaxed break-words">
           best way to make sure your message gets to me {'->'}{' '}
           <a 
             href="mailto:marczali.barna@gmail.com"
-            className="group relative inline-flex items-center gap-2"
+            className="group relative inline-flex items-center gap-1 md:gap-2"
           >
-            <span className="relative">
+            <span className="relative break-all">
               marczali.barna@gmail.com
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-text origin-left scale-x-100"></span>
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"></span>
             </span>
             <svg 
-              className="w-5 h-5 text-brand-text group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" 
+              className="w-4 h-4 md:w-5 md:h-5 text-brand-text group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300 flex-shrink-0" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24" 
@@ -842,13 +842,13 @@ const CONTENT_VIEWS = {
             </svg>
           </a>
         </div>
-        <div className="text-lg font-light leading-relaxed">
+        <div className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
           or{' '}
           <a 
             href="https://calendly.com/marczali-barna/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-2"
+            className="group relative inline-flex items-center gap-1 md:gap-2"
           >
             <span className="relative">
               book a call with me
@@ -856,7 +856,7 @@ const CONTENT_VIEWS = {
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"></span>
             </span>
             <svg 
-              className="w-5 h-5 text-brand-text group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" 
+              className="w-4 h-4 md:w-5 md:h-5 text-brand-text group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300 flex-shrink-0" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24" 
@@ -924,22 +924,22 @@ export default function Page() {
       <main className="min-h-screen relative overflow-y-auto">
         {/* Initial centered view */}
         <div
-          className={`absolute inset-0 flex items-center justify-center p-4 transition-opacity duration-[330ms] z-30 ${
+          className={`absolute inset-0 flex items-center justify-center p-4 md:p-8 transition-opacity duration-[330ms] z-30 ${
             isExpanded
               ? 'opacity-0 pointer-events-none'
               : 'opacity-100'
           }`}
         >
-          <div className="flex flex-col items-start -translate-x-8 -translate-y-12">
+          <div className="flex flex-col items-start -translate-x-4 md:-translate-x-8 -translate-y-8 md:-translate-y-12">
             <button
               onClick={handleExpand}
-              className="flex items-center gap-2 group mb-6 cursor-pointer bg-transparent border-none p-0"
+              className="flex items-center gap-2 group mb-4 md:mb-6 cursor-pointer bg-transparent border-none p-0"
             >
-              <h1 className="text-3xl md:text-3xl lg:text-4xl font-light text-brand-text group-hover:text-brand-accent transition-colors duration-300">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-brand-text group-hover:text-brand-accent transition-colors duration-300">
                 barna marczali
               </h1>
               <svg
-                className="w-8 h-8 text-brand-text group-hover:text-brand-accent transition-all duration-300 translate-y-0.5 group-hover:translate-x-1"
+                className="w-6 h-6 md:w-8 md:h-8 text-brand-text group-hover:text-brand-accent transition-all duration-300 translate-y-0.5 group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -954,14 +954,14 @@ export default function Page() {
               </svg>
             </button>
 
-            <nav className="flex flex-wrap gap-12 md:gap-18">
+            <nav className="flex flex-wrap gap-6 md:gap-12 lg:gap-18">
               {socials.map((social) => (
                 <a
                   key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-brand-text hover:text-brand-accent transition-colors duration-300 text-sm md:text-lg font-light"
+                  className="text-brand-text hover:text-brand-accent transition-colors duration-300 text-xs md:text-sm lg:text-base font-light"
                 >
                   {social.name}
                 </a>
@@ -978,29 +978,29 @@ export default function Page() {
         >
           {/* Header with name */}
           <div
-            className={`fixed top-8 left-8 transition-all duration-[520ms] delay-[130ms] z-20 ${
+            className={`fixed top-4 left-4 md:top-8 md:left-8 transition-all duration-[520ms] delay-[130ms] z-20 ${
               isExpanded ? 'translate-x-0 translate-y-0 scale-100 opacity-100' : 'translate-x-[calc(50vw-2rem)] translate-y-[calc(50vh-2rem)] scale-[0.3] opacity-0'
             }`}
             style={{
               transformOrigin: 'top left',
             }}
           >
-            <h1 className="text-2xl md:text-3xl font-light text-brand-text">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-light text-brand-text">
               barna marczali
             </h1>
           </div>
 
-          {/* Menu items */}
+          {/* Menu items - Desktop: vertical left sidebar, Mobile: horizontal bottom bar */}
           <nav
-            className={`fixed top-24 left-8 flex flex-col gap-4 transition-all duration-[520ms] delay-[195ms] z-20 ${
-              isExpanded ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+            className={`fixed md:top-24 md:left-8 bottom-16 left-0 right-0 md:bottom-auto md:right-auto flex md:flex-col flex-row md:gap-4 gap-2 justify-around md:justify-start px-4 md:px-0 transition-all duration-[520ms] delay-[195ms] z-20 ${
+              isExpanded ? 'md:translate-x-0 translate-y-0 opacity-100' : 'md:-translate-x-full translate-y-full opacity-0'
             }`}
           >
             {menuItems.map((item, index) => (
               <button
                 key={item.id}
                 onClick={() => handleMenuClick(item.id)}
-                className={`text-left text-lg font-light transition-colors duration-0 cursor-pointer bg-transparent border-none p-0 ${
+                className={`md:text-left text-center text-sm md:text-lg font-light transition-colors duration-0 cursor-pointer bg-transparent border-none p-0 ${
                   currentView === item.id
                     ? 'text-brand-accent'
                     : 'text-brand-text hover:text-brand-accent'
@@ -1020,16 +1020,26 @@ export default function Page() {
             className={`${
               currentView === 'about' 
                 ? 'w-full' 
-                : 'absolute inset-0 flex items-center justify-center px-8 md:px-16 lg:px-32 pointer-events-none'
+                : 'absolute inset-0 pointer-events-none overflow-y-auto'
             } transition-all duration-[520ms] delay-[325ms] z-10 ${
               isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
           >
-            <div className={`relative ${
+            <div className={`${
               currentView === 'about' 
                 ? 'w-full' 
-                : 'max-w-2xl w-full h-full flex items-center justify-center page-content-wrapper'
-            } text-brand-text ${currentView === 'about' ? '' : 'pointer-events-auto'}`}>
+                : 'min-h-full flex items-center justify-center px-4 md:px-8 lg:px-16 xl:px-32'
+            }`}
+            style={{
+              paddingTop: currentView === 'about' ? '4rem' : '5rem',
+              paddingBottom: currentView === 'about' ? '6rem' : '8rem'
+            }}
+            >
+              <div className={`relative ${
+                currentView === 'about' 
+                  ? 'w-full' 
+                  : 'max-w-2xl w-full page-content-wrapper'
+              } text-brand-text ${currentView === 'about' ? '' : 'pointer-events-auto'}`}>
               {/* Previous content (exiting) */}
               {PreviousContent && (
                 <div
@@ -1052,11 +1062,12 @@ export default function Page() {
                 </div>
               )}
             </div>
+            </div>
           </div>
 
           {/* Social links at bottom - fixed footer */}
           <nav
-            className={`fixed bottom-8 left-0 right-0 flex justify-center gap-8 md:gap-12 transition-all duration-[520ms] delay-[260ms] z-20 ${
+            className={`fixed bottom-2 md:bottom-8 left-0 right-0 flex justify-center gap-4 md:gap-8 lg:gap-12 transition-all duration-[520ms] delay-[260ms] z-20 ${
               isExpanded ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-[calc(-50vh+2rem)] scale-[0.3] opacity-0'
             }`}
             style={{
@@ -1069,7 +1080,7 @@ export default function Page() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand-text hover:text-brand-accent transition-colors duration-300 text-sm md:text-base font-light"
+                className="text-brand-text hover:text-brand-accent transition-colors duration-300 text-xs md:text-sm lg:text-base font-light"
               >
                 {social.name}
               </a>
