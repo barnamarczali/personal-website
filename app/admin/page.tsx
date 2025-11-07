@@ -14,6 +14,7 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   
   const [songRecs, setSongRecs] = useState<Recommendation[]>([]);
   const [writingRecs, setWritingRecs] = useState<Recommendation[]>([]);
@@ -109,7 +110,7 @@ export default function AdminPage() {
       </h2>
       {recommendations.length === 0 ? (
         <p className="text-brand-text/60 text-lg font-light">
-          No {title.toLowerCase()} yet
+          no {title.toLowerCase()} yet
         </p>
       ) : (
         <div className="space-y-3">
@@ -138,37 +139,64 @@ export default function AdminPage() {
       <main className="min-h-screen p-8 flex items-center justify-center">
         <div className="max-w-md w-full">
           <h1 className="text-3xl font-light text-brand-text mb-8 text-center">
-            Admin Login
+            admin login
           </h1>
           <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter admin password"
-                disabled={isAuthenticating}
-                className="w-full bg-transparent border-b border-brand-text text-lg font-light outline-none transition-colors duration-300 pb-2 placeholder:text-brand-text/50 focus:border-brand-accent focus:text-brand-accent"
-                style={{
-                  caretColor: '#E58F65',
-                }}
-              />
+            <div className="flex items-center gap-3">
+              <div className="flex-1 relative">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
+                  placeholder="enter admin password"
+                  disabled={isAuthenticating}
+                  className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 transition-colors duration-300 ${
+                    isFocused
+                      ? 'text-brand-accent placeholder:text-brand-accent/50'
+                      : 'text-brand-text placeholder:text-brand-text/50'
+                  }`}
+                  style={{
+                    caretColor: '#E58F65',
+                  }}
+                />
+                <div className={`absolute bottom-0 left-0 right-0 h-[1px] transition-colors duration-300 ${
+                  isFocused ? 'bg-brand-accent' : 'bg-brand-text'
+                }`}></div>
+              </div>
+              <button
+                type="submit"
+                disabled={isAuthenticating || !password}
+                className={`group flex-shrink-0 transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed ${
+                  isFocused ? 'text-brand-accent' : 'text-brand-text hover:text-brand-accent'
+                }`}
+                aria-label="Submit"
+              >
+                <svg
+                  className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </button>
             </div>
             {authError && (
               <p className="text-red-400 text-sm font-light">{authError}</p>
             )}
-            <button
-              type="submit"
-              disabled={isAuthenticating || !password}
-              className="w-full px-6 py-3 bg-brand-accent text-brand-bg rounded-md hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed font-light"
-            >
-              {isAuthenticating ? 'Authenticating...' : 'Login'}
-            </button>
             <a
               href="/"
               className="block text-center text-brand-text hover:text-brand-accent transition-colors text-base font-light mt-4"
             >
-              Back to Site
+              back to site
             </a>
           </form>
         </div>
@@ -181,9 +209,9 @@ export default function AdminPage() {
       <main className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-light text-brand-text mb-8">
-            Recommendations Admin
+            recommendations admin
           </h1>
-          <p className="text-lg font-light text-brand-text">Loading...</p>
+          <p className="text-lg font-light text-brand-text">loading...</p>
         </div>
       </main>
     );
@@ -194,17 +222,17 @@ export default function AdminPage() {
       <main className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-light text-brand-text mb-8">
-            Recommendations Admin
+            recommendations admin
           </h1>
           <p className="text-lg font-light text-red-400 mb-4">{error}</p>
           <p className="text-base font-light text-brand-text/80">
-            Check the DATABASE_SETUP.md file for setup instructions.
+            check the DATABASE_SETUP.md file for setup instructions.
           </p>
           <button
             onClick={fetchRecommendations}
             className="mt-4 px-4 py-2 bg-brand-accent text-brand-bg rounded-md hover:opacity-80 transition-opacity"
           >
-            Try Again
+            try again
           </button>
         </div>
       </main>
@@ -216,42 +244,42 @@ export default function AdminPage() {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-light text-brand-text">
-            Recommendations Admin
+            recommendations admin
           </h1>
           <div className="flex gap-4">
             <button
               onClick={fetchRecommendations}
               className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
             >
-              Refresh
+              refresh
             </button>
             <button
               onClick={handleLogout}
               className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
             >
-              Logout
+              logout
             </button>
             <a
               href="/"
               className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
             >
-              Back to Site
+              back to site
             </a>
           </div>
         </div>
 
         <RecommendationSection 
-          title="Song Recommendations" 
+          title="song recommendations" 
           recommendations={songRecs} 
         />
         
         <RecommendationSection 
-          title="Writing Requests" 
+          title="writing requests" 
           recommendations={writingRecs} 
         />
         
         <RecommendationSection 
-          title="Book Recommendations" 
+          title="book recommendations" 
           recommendations={bookRecs} 
         />
       </div>
