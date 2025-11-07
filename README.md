@@ -1,23 +1,6 @@
 # Personal Website
 
-personal website of Barna Marczali
-
-## Tech Stack
-
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- React 18
-- Redis (Serverless Redis on Vercel)
-
-## Features
-
-- 🎨 Beautiful, animated UI with smooth page transitions
-- 🎵 Music section with playlist recommendations
-- ✍️ Writing section with interactive inputs
-- 💾 Database integration for collecting song recommendations and writing requests
-- 🔥 Custom click spark effects
-- 📱 Fully responsive design
+Personal website of Barna Marczali built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Development
 
@@ -26,32 +9,34 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Visit [http://localhost:3000](http://localhost:3000)
 
-## Database Setup
+## Database Setup (Vercel Redis)
 
-The site uses Redis (on Vercel) for storing recommendations. See `DATABASE_SETUP.md` for detailed setup instructions.
+1. **Create Redis Database**:
+   - Go to Vercel Dashboard → Your Project → Storage tab
+   - Click "Create Database" → Select "Redis" (Upstash)
+   - Vercel automatically adds `REDIS_URL` environment variable
 
+2. **Set Admin Password**:
+   - Go to Vercel Dashboard → Settings → Environment Variables
+   - Add: `PASSWORD` = your chosen admin password
+   - Redeploy
 
-For local development without database:
-```bash
-vercel env pull .env.local  # Optional: pull env vars from Vercel
-npm run dev
-```
+3. **Local Development** (optional):
+   ```bash
+   vercel env pull .env.local
+   npm run dev
+   ```
 
 ## Admin Dashboard
 
-Visit `/admin` to view submitted recommendations. 
+Visit `/admin` to view submitted recommendations (password-protected).
 
-**Password Protected**: Set the `PASSWORD` environment variable in Vercel to secure the admin dashboard.
+## Stack
 
-## Design
-
-- Background: `#063970`
-- Accent: `#E58F65`
-- Text: `#F1F1E7`
-- Font: Manrope (sans-serif)
-
-## Documentation
-
-- `DATABASE_SETUP.md` - Database configuration guide
+- Next.js 14 + TypeScript + React 18
+- Tailwind CSS
+- Vercel Redis (stores song/writing recommendations)
+- Custom animations & click effects
+- Fully responsive design
