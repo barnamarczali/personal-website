@@ -184,6 +184,51 @@ nav button:hover {
   }
 }
 
+/* Music bar animations - each bar has unique pattern for randomness */
+@keyframes musicBar1 {
+  0%, 100% { height: 6px; }
+  25% { height: 18px; }
+  50% { height: 10px; }
+  75% { height: 20px; }
+}
+
+@keyframes musicBar2 {
+  0%, 100% { height: 14px; }
+  20% { height: 8px; }
+  60% { height: 22px; }
+  80% { height: 12px; }
+}
+
+@keyframes musicBar3 {
+  0%, 100% { height: 10px; }
+  30% { height: 20px; }
+  50% { height: 6px; }
+  70% { height: 16px; }
+}
+
+@keyframes musicBar4 {
+  0%, 100% { height: 16px; }
+  35% { height: 10px; }
+  55% { height: 22px; }
+  85% { height: 8px; }
+}
+
+.animate-music-bar-1 {
+  animation: musicBar1 1.3s ease-in-out infinite;
+}
+
+.animate-music-bar-2 {
+  animation: musicBar2 1.1s ease-in-out infinite;
+}
+
+.animate-music-bar-3 {
+  animation: musicBar3 1.5s ease-in-out infinite;
+}
+
+.animate-music-bar-4 {
+  animation: musicBar4 0.9s ease-in-out infinite;
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   /* Adjust section content padding for mobile */

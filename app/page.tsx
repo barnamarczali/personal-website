@@ -620,16 +620,25 @@ const CONTENT_VIEWS: {
   ),
   music: (currentSong: { title: string; url: string }) => (
     <div className="px-4 md:px-0">
-      <h2 className="text-xl md:text-2xl font-light mb-4">
+      <h2 className="text-xl md:text-2xl font-light mb-4 flex items-center gap-3 flex-wrap">
         <span className="text-brand-accent">currently listening to: </span>
-        <a 
-          href={currentSong.url} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-brand-accent underline hover:text-brand-accent/90 transition-colors"
-        >
-          {currentSong.title}
-        </a>
+        {/* Animated music bars with link and hover title */}
+        <div className="group flex items-center gap-2">
+          <a 
+            href={currentSong.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-end gap-[3px] h-5 hover:opacity-80 transition-opacity cursor-pointer"
+          >
+            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-1" />
+            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-2" />
+            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-3" />
+            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-4" />
+          </a>
+          <span className="text-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {currentSong.title}
+          </span>
+        </div>
       </h2>
       <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed mb-6"> 
         here, i try to curate some recommendations, display my playlists, and hopefully share some of my own music in the future.
