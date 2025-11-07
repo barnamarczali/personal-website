@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ClickSpark from '@/components/ClickSpark';
 import RecommendationInput from '@/components/RecommendationInput';
 
@@ -424,7 +424,13 @@ const AboutContent = () => {
   );
 };
 
-const CONTENT_VIEWS = {
+const CONTENT_VIEWS: {
+  about: () => JSX.Element;
+  projects: () => JSX.Element;
+  writing: () => JSX.Element;
+  music: (currentSong: { title: string; url: string }) => JSX.Element;
+  contact: () => JSX.Element;
+} = {
   about: () => <AboutContent />,
   projects: () => (
     <div>
@@ -612,11 +618,20 @@ const CONTENT_VIEWS = {
       </div>
     </div>
   ),
-  music: () => (
+  music: (currentSong: { title: string; url: string }) => (
     <div className="px-4 md:px-0">
-      <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">just listen</h2>
-      <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed mb-6">
-        music has always been very important to me and i think it is essential that we stop and just listen to it every once in a while. 
+      <h2 className="text-xl md:text-2xl font-light mb-4">
+        <span className="text-brand-accent">currently listening to: </span>
+        <a 
+          href={currentSong.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-brand-accent underline hover:text-brand-accent/90 transition-colors"
+        >
+          {currentSong.title}
+        </a>
+      </h2>
+      <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed mb-6"> 
         here, i try to curate some recommendations, display my playlists, and hopefully share some of my own music in the future.
       </p>
       
@@ -686,7 +701,7 @@ const CONTENT_VIEWS = {
             />
           </a>
           <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-base font-light text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-            give me recs on soundcloud
+            send me gems on soundcloud
           </span>
         </div>
       </div>
@@ -851,7 +866,7 @@ const CONTENT_VIEWS = {
             className="group relative inline-flex items-center gap-1 md:gap-2"
           >
             <span className="relative">
-              book a call with me
+              schedule a call with me
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-text origin-left scale-x-100"></span>
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"></span>
             </span>
@@ -877,6 +892,43 @@ export default function Page() {
   const [previousView, setPreviousView] = useState<string | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
+  const [currentSong, setCurrentSong] = useState<{ title: string; url: string }>({ title: 'humans', url: 'https://en.wikipedia.org/wiki/Human' });
+
+  // Fetch current song on mount and when music view is opened
+  useEffect(() => {
+    const fetchCurrentSong = async () => {
+      try {
+        const response = await fetch('/api/current-song');
+        const data = await response.json();
+        if (data.currentSong) {
+          setCurrentSong(data.currentSong);
+        }
+      } catch (error) {
+        console.error('Error fetching current song:', error);
+      }
+    };
+
+    fetchCurrentSong();
+  }, []);
+
+  // Refresh current song when navigating to music view
+  useEffect(() => {
+    if (currentView === 'music') {
+      const fetchCurrentSong = async () => {
+        try {
+          const response = await fetch('/api/current-song');
+          const data = await response.json();
+          if (data.currentSong) {
+            setCurrentSong(data.currentSong);
+          }
+        } catch (error) {
+          console.error('Error fetching current song:', error);
+        }
+      };
+
+      fetchCurrentSong();
+    }
+  }, [currentView]);
 
   const handleExpand = () => {
     setIsExpanded(true);
@@ -910,8 +962,20 @@ export default function Page() {
     }, 598);
   };
 
-  const CurrentContent = currentView ? CONTENT_VIEWS[currentView as keyof typeof CONTENT_VIEWS] : null;
-  const PreviousContent = previousView ? CONTENT_VIEWS[previousView as keyof typeof CONTENT_VIEWS] : null;
+  const renderContent = (view: string | null) => {
+    if (!view) return null;
+    
+    if (view === 'music') {
+      return CONTENT_VIEWS.music(currentSong);
+    }
+    
+    const contentView = CONTENT_VIEWS[view as keyof typeof CONTENT_VIEWS];
+    if (typeof contentView === 'function' && view !== 'music') {
+      return (contentView as () => JSX.Element)();
+    }
+    
+    return null;
+  };
 
   return (
     <ClickSpark
@@ -1041,16 +1105,16 @@ export default function Page() {
                   : 'max-w-2xl w-full page-content-wrapper'
               } text-brand-text ${currentView === 'about' ? '' : 'pointer-events-auto'}`}>
               {/* Previous content (exiting) */}
-              {PreviousContent && (
+              {previousView && (
                 <div
                   className={`page-content-layer page-content-exit-${scrollDirection}`}
                 >
-                  <PreviousContent />
+                  {renderContent(previousView)}
                 </div>
               )}
               
               {/* Current content (entering) */}
-              {CurrentContent && (
+              {currentView && (
                 <div
                   className={`page-content-current ${
                     isTransitioning || previousView
@@ -1058,7 +1122,7 @@ export default function Page() {
                       : ''
                   }`}
                 >
-                  <CurrentContent />
+                  {renderContent(currentView)}
                 </div>
               )}
             </div>

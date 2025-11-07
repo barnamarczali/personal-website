@@ -21,6 +21,10 @@ export default function AdminPage() {
   const [bookRecs, setBookRecs] = useState<Recommendation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  const [currentSong, setCurrentSong] = useState({ title: '', url: '' });
+  const [editingSong, setEditingSong] = useState(false);
+  const [songUpdateSuccess, setSongUpdateSuccess] = useState(false);
 
   useEffect(() => {
     // Check if already authenticated in session storage
@@ -77,15 +81,17 @@ export default function AdminPage() {
     setError(null);
 
     try {
-      const [songs, writing, books] = await Promise.all([
+      const [songs, writing, books, currentSongData] = await Promise.all([
         fetch('/api/recommendations?type=song').then(r => r.json()),
         fetch('/api/recommendations?type=writing').then(r => r.json()),
         fetch('/api/recommendations?type=book').then(r => r.json()),
+        fetch('/api/current-song').then(r => r.json()),
       ]);
 
       setSongRecs(songs.recommendations || []);
       setWritingRecs(writing.recommendations || []);
       setBookRecs(books.recommendations || []);
+      setCurrentSong(currentSongData.currentSong || { title: '', url: '' });
     } catch (err) {
       setError('Failed to load recommendations. Make sure Vercel KV is set up.');
     } finally {
@@ -95,6 +101,35 @@ export default function AdminPage() {
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString();
+  };
+
+  const handleUpdateCurrentSong = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setEditingSong(true);
+    setSongUpdateSuccess(false);
+
+    try {
+      const response = await fetch('/api/current-song', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentSong),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSongUpdateSuccess(true);
+        setTimeout(() => setSongUpdateSuccess(false), 3000);
+      } else {
+        alert('Failed to update current song');
+      }
+    } catch (err) {
+      alert('Error updating current song');
+    } finally {
+      setEditingSong(false);
+    }
   };
 
   const RecommendationSection = ({ 
@@ -209,7 +244,7 @@ export default function AdminPage() {
       <main className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-light text-brand-text mb-8">
-            recommendations admin
+            admin dashboard
           </h1>
           <p className="text-lg font-light text-brand-text">loading...</p>
         </div>
@@ -266,6 +301,59 @@ export default function AdminPage() {
               back to site
             </a>
           </div>
+        </div>
+
+        {/* Current Song Editor */}
+        <div className="mb-12 p-6 rounded-lg" style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}>
+          <h2 className="text-2xl font-light text-brand-accent mb-4">
+            currently listening to
+          </h2>
+          <form onSubmit={handleUpdateCurrentSong} className="space-y-4">
+            <div>
+              <label htmlFor="songTitle" className="block text-sm font-light text-brand-text/80 mb-2">
+                Song Title
+              </label>
+              <input
+                id="songTitle"
+                type="text"
+                value={currentSong.title}
+                onChange={(e) => setCurrentSong({ ...currentSong, title: e.target.value })}
+                placeholder="Enter song title"
+                required
+                className="w-full bg-brand-bg border border-brand-text/20 rounded px-3 py-2 text-brand-text font-light outline-none focus:border-brand-accent transition-colors"
+                style={{ caretColor: '#E58F65' }}
+              />
+            </div>
+            <div>
+              <label htmlFor="songUrl" className="block text-sm font-light text-brand-text/80 mb-2">
+                Song URL
+              </label>
+              <input
+                id="songUrl"
+                type="url"
+                value={currentSong.url}
+                onChange={(e) => setCurrentSong({ ...currentSong, url: e.target.value })}
+                placeholder="Enter song URL (e.g., Spotify, Apple Music link)"
+                required
+                className="w-full bg-brand-bg border border-brand-text/20 rounded px-3 py-2 text-brand-text font-light outline-none focus:border-brand-accent transition-colors"
+                style={{ caretColor: '#E58F65' }}
+              />
+            </div>
+            <div className="flex items-center gap-4">
+              <button
+                type="submit"
+                disabled={editingSong}
+                className="px-6 py-2 bg-brand-accent text-brand-bg rounded-md hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed font-light"
+              >
+                {editingSong ? 'Updating...' : 'Update Song'}
+              </button>
+              {songUpdateSuccess && (
+                <span className="text-green-400 font-light text-sm">
+                  ✓ Successfully updated!
+                </span>
+              )}
+            </div>
+          </form>
         </div>
 
         <RecommendationSection 
