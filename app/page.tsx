@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ClickSpark from '@/components/ClickSpark';
+import RecommendationInput from '@/components/RecommendationInput';
 
 const socials = [
   { name: 'github', url: 'https://github.com/barnamarczali' },
@@ -571,8 +572,8 @@ const CONTENT_VIEWS = {
     </div>
   ),
   writing: () => (
-    <div>
-      <div className="flex items-center mb-4">
+    <div className="flex flex-col items-center w-full">
+      <div className="flex items-center justify-center mb-4">
         <p className="text-lg font-light leading-relaxed">
           still typing...
         </p>
@@ -603,6 +604,11 @@ const CONTENT_VIEWS = {
             srcSet="/beachball.svg 1x, /beachball.svg 2x"
           />
         </div>
+      </div>
+
+      {/* Writing Request Input */}
+      <div style={{ width: '130%', maxWidth: '800px' }}>
+        <RecommendationInput placeholder="what should i write about next?" type="writing" width="full" />
       </div>
     </div>
   ),
@@ -682,6 +688,13 @@ const CONTENT_VIEWS = {
           <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-base font-light text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
             give me recs on soundcloud
           </span>
+        </div>
+      </div>
+
+      {/* Song Recommendation Input */}
+      <div className="flex justify-center mt-8">
+        <div style={{ width: '40%', maxWidth: '400px' }}>
+          <RecommendationInput placeholder="send me a song" type="song" width="full" />
         </div>
       </div>
     </div>
