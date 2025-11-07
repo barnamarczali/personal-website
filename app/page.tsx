@@ -806,7 +806,7 @@ const CONTENT_VIEWS = {
         </a>
       </div>
 
-      {/* Email with animated underline */}
+      {/* Email and Calendly with animated underlines */}
       <div className="space-y-4">
         <div className="text-lg font-light leading-relaxed">
           best way to make sure your message gets to me {'->'}{' '}
@@ -816,6 +816,30 @@ const CONTENT_VIEWS = {
           >
             <span className="relative">
               marczali.barna@gmail.com
+              <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-text origin-left scale-x-100"></span>
+              <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"></span>
+            </span>
+            <svg 
+              className="w-5 h-5 text-brand-text group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </a>
+        </div>
+        <div className="text-lg font-light leading-relaxed">
+          or{' '}
+          <a 
+            href="https://calendly.com/marczali-barna/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center gap-2"
+          >
+            <span className="relative">
+              book a call with me
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-text origin-left scale-x-100"></span>
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"></span>
             </span>
