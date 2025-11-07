@@ -26,8 +26,8 @@ export async function GET() {
     
     const data = await redis.get(CURRENT_SONG_KEY);
     const currentSong = data ? JSON.parse(data) : {
-      title: 'Nothing playing',
-      url: '#'
+      title: 'humans',
+      url: 'https://en.wikipedia.org/wiki/Human'
     };
     
     return NextResponse.json({ currentSong });
