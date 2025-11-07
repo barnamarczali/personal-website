@@ -1020,7 +1020,7 @@ export default function Page() {
             className={`${
               currentView === 'about' 
                 ? 'w-full' 
-                : 'absolute inset-0 pointer-events-none overflow-y-auto'
+                : 'absolute inset-0 overflow-y-auto'
             } transition-all duration-[520ms] delay-[325ms] z-10 ${
               isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
@@ -1028,7 +1028,7 @@ export default function Page() {
             <div className={`${
               currentView === 'about' 
                 ? 'w-full' 
-                : 'min-h-full flex items-center justify-center px-4 md:px-8 lg:px-16 xl:px-32'
+                : 'min-h-full flex items-center justify-center px-4 md:px-8 lg:px-16 xl:px-32 pointer-events-none'
             }`}
             style={{
               paddingTop: currentView === 'about' ? '4rem' : '5rem',

@@ -22,6 +22,9 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
 
     setIsSubmitting(true);
     setIsSliding(true);
+    
+    // Show success message immediately
+    setShowSuccess(true);
 
     try {
       const response = await fetch('/api/recommendations', {
@@ -36,9 +39,6 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
       });
 
       if (response.ok) {
-        // Show success message
-        setShowSuccess(true);
-        
         // Wait for slide animation to complete, then reset
         setTimeout(() => {
           setIsSliding(false);
@@ -75,7 +75,7 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
               onBlur={() => setIsFocused(false)}
               placeholder={placeholder}
               disabled={isSubmitting}
-              className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 ${
+              className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-opacity placeholder:duration-300 ${
                 isFocused
                   ? 'text-brand-accent placeholder:text-brand-accent/50'
                   : 'text-brand-text placeholder:text-brand-text/50'
@@ -119,7 +119,7 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
             {/* Thank you popup near arrow */}
             {showSuccess && (
               <div 
-                className="absolute -top-2 -right-2 whitespace-nowrap pointer-events-none"
+                className="absolute -top-2 left-full ml-3 whitespace-nowrap pointer-events-none"
                 style={{
                   animation: 'fadeOutUp 2s ease-out forwards',
                 }}
