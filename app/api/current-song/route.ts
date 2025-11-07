@@ -17,14 +17,12 @@ async function connectRedis() {
   }
 }
 
-const CURRENT_SONG_KEY = 'current_song';
-
 // GET - Fetch current song
 export async function GET() {
   try {
     await connectRedis();
     
-    const data = await redis.get(CURRENT_SONG_KEY);
+    const data = await redis.get('music:current');
     const currentSong = data ? JSON.parse(data) : {
       title: 'humans',
       url: 'https://en.wikipedia.org/wiki/Human'
@@ -40,8 +38,8 @@ export async function GET() {
   }
 }
 
-// PUT - Update current song
-export async function PUT(request: NextRequest) {
+// POST - Update current song (using POST instead of PUT)
+export async function POST(request: NextRequest) {
   try {
     await connectRedis();
     
@@ -60,7 +58,7 @@ export async function PUT(request: NextRequest) {
       updatedAt: new Date().toISOString()
     };
 
-    await redis.set(CURRENT_SONG_KEY, JSON.stringify(songData));
+    await redis.set('music:current', JSON.stringify(songData));
 
     return NextResponse.json({ 
       success: true,

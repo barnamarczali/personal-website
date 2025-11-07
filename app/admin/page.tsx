@@ -110,7 +110,7 @@ export default function AdminPage() {
 
     try {
       const response = await fetch('/api/current-song', {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -311,7 +311,7 @@ export default function AdminPage() {
           <form onSubmit={handleUpdateCurrentSong} className="space-y-4">
             <div>
               <label htmlFor="songTitle" className="block text-sm font-light text-brand-text/80 mb-2">
-                Song Title
+                song title
               </label>
               <input
                 id="songTitle"
@@ -326,7 +326,7 @@ export default function AdminPage() {
             </div>
             <div>
               <label htmlFor="songUrl" className="block text-sm font-light text-brand-text/80 mb-2">
-                Song URL
+                song url
               </label>
               <input
                 id="songUrl"
@@ -345,11 +345,11 @@ export default function AdminPage() {
                 disabled={editingSong}
                 className="px-6 py-2 bg-brand-accent text-brand-bg rounded-md hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed font-light"
               >
-                {editingSong ? 'Updating...' : 'Update Song'}
+                {editingSong ? 'updating...' : 'update song'}
               </button>
               {songUpdateSuccess && (
                 <span className="text-green-400 font-light text-sm">
-                  ✓ Successfully updated!
+                  successfully updated!
                 </span>
               )}
             </div>
