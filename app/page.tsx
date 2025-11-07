@@ -693,7 +693,7 @@ const CONTENT_VIEWS = {
 
       {/* Song Recommendation Input */}
       <div className="flex justify-center mt-8">
-        <div style={{ width: '40%', maxWidth: '400px' }}>
+        <div style={{ width: '40%', minWidth: '180px', maxWidth: '400px' }}>
           <RecommendationInput placeholder="send me a song" type="song" width="full" />
         </div>
       </div>

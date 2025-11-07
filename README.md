@@ -41,7 +41,9 @@ npm run dev
 
 ## Admin Dashboard
 
-Visit `/admin` to view submitted recommendations (requires database setup).
+Visit `/admin` to view submitted recommendations. 
+
+**Password Protected**: Set the `PASSWORD` environment variable in Vercel to secure the admin dashboard.
 
 ## Design
 

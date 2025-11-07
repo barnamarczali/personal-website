@@ -82,9 +82,28 @@ To view the recommendations people have submitted:
 
 Upstash Redis on Vercel has a generous free tier:
 - 10,000 commands per day
-- 256MB storage
+- 30MB storage
 
 This is more than enough for a personal website collecting recommendations!
+
+## Admin Dashboard Security
+
+The admin dashboard at `/admin` is password-protected. You need to set up a password:
+
+1. Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+2. Add a new environment variable:
+   - **Name**: `PASSWORD`
+   - **Value**: Your chosen admin password
+3. Redeploy your site
+
+Once set up, you'll need to enter this password to access the admin dashboard and view recommendations.
+
+## Environment Variables
+
+Required environment variables:
+- `REDIS_URL` - Redis connection URL (automatically added by Vercel)
+  - Format: `redis://default:password@host:port`
+- `PASSWORD` - Admin password for accessing the dashboard (you need to add this)
 
 ## Troubleshooting
 
@@ -93,6 +112,8 @@ If recommendations aren't saving:
 2. Check the browser console for errors
 3. Verify the `REDIS_URL` environment variable is set (in Vercel Dashboard → Settings → Environment Variables)
 
-The required environment variable (automatically added by Vercel):
-- `REDIS_URL` - Redis connection URL in format: `redis://default:password@host:port`
+If you can't access the admin dashboard:
+1. Make sure the `PASSWORD` environment variable is set in Vercel
+2. Clear your browser's session storage and try again
+3. Check the browser console for authentication errors
 

@@ -10,6 +10,11 @@ interface Recommendation {
 }
 
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  
   const [songRecs, setSongRecs] = useState<Recommendation[]>([]);
   const [writingRecs, setWritingRecs] = useState<Recommendation[]>([]);
   const [bookRecs, setBookRecs] = useState<Recommendation[]>([]);
@@ -17,8 +22,54 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchRecommendations();
+    // Check if already authenticated in session storage
+    const authenticated = sessionStorage.getItem('admin_authenticated');
+    if (authenticated === 'true') {
+      setIsAuthenticated(true);
+      fetchRecommendations();
+    } else {
+      setLoading(false);
+    }
   }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError('');
+    setIsAuthenticating(true);
+
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await response.json();
+
+      if (data.authenticated) {
+        sessionStorage.setItem('admin_authenticated', 'true');
+        setIsAuthenticated(true);
+        setPassword('');
+        fetchRecommendations();
+      } else {
+        setAuthError('Incorrect password');
+      }
+    } catch (err) {
+      setAuthError('Authentication failed. Please try again.');
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('admin_authenticated');
+    setIsAuthenticated(false);
+    setSongRecs([]);
+    setWritingRecs([]);
+    setBookRecs([]);
+  };
 
   const fetchRecommendations = async () => {
     setLoading(true);
@@ -81,6 +132,50 @@ export default function AdminPage() {
     </div>
   );
 
+  // Login form
+  if (!isAuthenticated) {
+    return (
+      <main className="min-h-screen p-8 flex items-center justify-center">
+        <div className="max-w-md w-full">
+          <h1 className="text-3xl font-light text-brand-text mb-8 text-center">
+            Admin Login
+          </h1>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter admin password"
+                disabled={isAuthenticating}
+                className="w-full bg-transparent border-b border-brand-text text-lg font-light outline-none transition-colors duration-300 pb-2 placeholder:text-brand-text/50 focus:border-brand-accent focus:text-brand-accent"
+                style={{
+                  caretColor: '#E58F65',
+                }}
+              />
+            </div>
+            {authError && (
+              <p className="text-red-400 text-sm font-light">{authError}</p>
+            )}
+            <button
+              type="submit"
+              disabled={isAuthenticating || !password}
+              className="w-full px-6 py-3 bg-brand-accent text-brand-bg rounded-md hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed font-light"
+            >
+              {isAuthenticating ? 'Authenticating...' : 'Login'}
+            </button>
+            <a
+              href="/"
+              className="block text-center text-brand-text hover:text-brand-accent transition-colors text-base font-light mt-4"
+            >
+              Back to Site
+            </a>
+          </form>
+        </div>
+      </main>
+    );
+  }
+
   if (loading) {
     return (
       <main className="min-h-screen p-8">
@@ -129,6 +224,12 @@ export default function AdminPage() {
               className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
             >
               Refresh
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 text-brand-text hover:text-brand-accent transition-colors text-base font-light"
+            >
+              Logout
             </button>
             <a
               href="/"

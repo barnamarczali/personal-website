@@ -13,6 +13,7 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSliding, setIsSliding] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
     if (!value.trim() || isSubmitting) return;
 
     setIsSubmitting(true);
+    setIsSliding(true);
 
     try {
       const response = await fetch('/api/recommendations', {
@@ -34,12 +36,21 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
       });
 
       if (response.ok) {
-        setValue('');
+        // Show success message
         setShowSuccess(true);
+        
+        // Wait for slide animation to complete, then reset
+        setTimeout(() => {
+          setIsSliding(false);
+          setValue('');
+        }, 500);
+        
+        // Hide success message after 2 seconds
         setTimeout(() => setShowSuccess(false), 2000);
       }
     } catch (error) {
       console.error('Error submitting recommendation:', error);
+      setIsSliding(false);
     } finally {
       setIsSubmitting(false);
     }
@@ -55,7 +66,7 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
     <div className="mt-6">
       <form onSubmit={handleSubmit} className="relative">
         <div className="flex items-center gap-3">
-          <div className={`${getWidthClass()} relative`}>
+          <div className={`${getWidthClass()} relative overflow-hidden`}>
             <input
               type="text"
               value={value}
@@ -64,13 +75,16 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
               onBlur={() => setIsFocused(false)}
               placeholder={placeholder}
               disabled={isSubmitting}
-              className={`w-full bg-transparent text-lg font-light outline-none transition-colors duration-300 pb-1 placeholder:transition-colors placeholder:duration-300 ${
+              className={`w-full bg-transparent text-lg font-light outline-none pb-1 placeholder:transition-colors placeholder:duration-300 ${
                 isFocused
                   ? 'text-brand-accent placeholder:text-brand-accent/50'
                   : 'text-brand-text placeholder:text-brand-text/50'
               }`}
               style={{
                 caretColor: isFocused ? '#E58F65' : '#F5F5F5',
+                transition: 'transform 500ms ease-out, opacity 500ms ease-out, color 300ms',
+                transform: isSliding ? 'translateX(150%)' : 'translateX(0)',
+                opacity: isSliding ? 0 : 1,
               }}
             />
             <div
@@ -82,7 +96,7 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
           <button
             type="submit"
             disabled={isSubmitting || !value.trim()}
-            className={`group flex-shrink-0 transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed ${
+            className={`group flex-shrink-0 transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed relative ${
               isFocused ? 'text-brand-accent' : 'text-brand-text'
             }`}
             aria-label="Submit"
@@ -101,14 +115,23 @@ export default function RecommendationInput({ placeholder, type, width = 'full' 
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
             </svg>
+            
+            {/* Thank you popup near arrow */}
+            {showSuccess && (
+              <div 
+                className="absolute -top-2 -right-2 whitespace-nowrap pointer-events-none"
+                style={{
+                  animation: 'fadeOutUp 2s ease-out forwards',
+                }}
+              >
+                <span className="text-sm font-light text-brand-accent">
+                  thank you!
+                </span>
+              </div>
+            )}
           </button>
         </div>
       </form>
-      {showSuccess && (
-        <p className="text-sm font-light text-brand-accent mt-2 animate-fade-in">
-          thanks for the recommendation!
-        </p>
-      )}
     </div>
   );
 }
