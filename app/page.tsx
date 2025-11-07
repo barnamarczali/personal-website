@@ -9,7 +9,6 @@ const socials = [
   { name: 'x', url: 'https://x.com/barnamarczali' },
   { name: 'email', url: 'mailto:marczali.barna@gmail.com' },
   { name: 'discord', url: 'https://discord.com/users/189419600000188416' },
-  { name: 'threads', url: 'https://www.threads.net/@barnamarczali' },
 ];
 
 const menuItems = [
