@@ -10,6 +10,7 @@ const socials = [
   { name: 'x', url: 'https://x.com/barnamarczali' },
   { name: 'email', url: 'mailto:marczali.barna@gmail.com' },
   { name: 'discord', url: 'https://discord.com/users/189419600000188416' },
+  { name: 'telegram', url: 'https://t.me/barnamarczali' },
 ];
 
 const menuItems = [
@@ -104,7 +105,7 @@ const AboutContent = () => {
           {/* Timeline entries */}
           <div className="space-y-0">
             {/* 2025 - Startup Founder */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -117,7 +118,7 @@ const AboutContent = () => {
             </div>
             
             {/* 2025 - VC Intern */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -130,7 +131,7 @@ const AboutContent = () => {
             </div>
             
             {/* 2025 - Johns Hopkins Algorithmic Trading Club */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -143,7 +144,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2024 - Startup Founder */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -156,7 +157,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2024 - JHU Sports Analytics */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -169,7 +170,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2024 - AMA @ JHU */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -182,7 +183,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2023 - JHU Economics Club */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2023</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -195,7 +196,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2022 - ASP Group */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -208,7 +209,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2022 - Enpulsion */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -221,7 +222,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2022 - Milestone Business Society */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -234,7 +235,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2021 - Tesztallomas.hu */}
-            <div className="flex gap-1 md:gap-2 items-start pb-8">
+            <div className="flex gap-2 md:gap-2 items-start pb-8">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2021</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -247,7 +248,7 @@ const AboutContent = () => {
             </div>
 
             {/* 2020 - Urban AI Parking Assistant */}
-            <div className="flex gap-1 md:gap-2 items-start">
+            <div className="flex gap-2 md:gap-2 items-start">
               <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2020</span>
               <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
@@ -740,9 +741,20 @@ const CONTENT_VIEWS: {
           className="flex items-center justify-center w-7 h-7"
           title="GitHub"
         >
-          <svg className="w-full h-full text-brand-text hover:text-brand-accent transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-          </svg>
+          <img 
+            src="/github-icon.svg" 
+            alt="GitHub" 
+            className="w-full h-full object-contain transition-all duration-300"
+            style={{
+              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
+            }}
+          />
         </a>
 
         {/* LinkedIn */}
@@ -750,7 +762,7 @@ const CONTENT_VIEWS: {
           href="https://linkedin.com/in/barnamarczali"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-7 h-7"
+          className="flex items-center justify-center w-9 h-9"
           title="LinkedIn"
         >
           <img 
@@ -774,7 +786,7 @@ const CONTENT_VIEWS: {
           href="https://x.com/barnamarczali"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-7 h-7"
+          className="flex items-center justify-center w-5 h-5"
           title="X (Twitter)"
         >
           <img 
@@ -822,12 +834,36 @@ const CONTENT_VIEWS: {
           href="https://www.threads.net/@barnamarczali"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-7 h-7"
+          className="flex items-center justify-center w-6 h-6"
           title="Threads"
         >
           <img 
-            src="/Threads_(app)_logo.svg.png" 
+            src="/threads.svg" 
             alt="Threads" 
+            className="w-full h-full object-contain transition-all duration-300"
+            style={{
+              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
+            }}
+          />
+        </a>
+
+        {/* Telegram */}
+        <a
+          href="https://t.me/barnamarczali"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-9 h-9"
+          title="Telegram"
+        >
+          <img 
+            src="/telegram.svg" 
+            alt="Telegram" 
             className="w-full h-full object-contain transition-all duration-300"
             style={{
               filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
