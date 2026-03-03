@@ -463,6 +463,30 @@ const CONTENT_VIEWS: {
           </a>
         </div>
 
+        {/* building a robot in 48hrs */}
+        <div 
+          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
+          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
+        >
+          <div className="flex-1 w-full">
+            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">building a robot in 48hrs</h3>
+            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
+              we built a full stack, fully functional land robot in limited time, from 0 to 1, to launch the bme robotics club with its first successful project. read our blog for more
+            </p>
+          </div>
+          <a
+            href="https://www.bmerobotics.hu/newsroom/1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
+            title="Visit website"
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+
         {/* tremolo */}
         <div 
           className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
