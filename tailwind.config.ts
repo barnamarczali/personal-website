@@ -1,23 +1,31 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  // lib/ is scanned too: skill tints are class strings that live in lib/data.
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './lib/**/*.{ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Manrope', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-manrope)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
         brand: {
-          bg: '#063970',
-          accent: '#E58F65',
-          text: '#F1F1E7',
-        }
+          // Channel triplets let opacity modifiers work while useTimeOfDay
+          // repaints the site by rewriting the custom properties.
+          bg: 'rgb(var(--brand-bg) / <alpha-value>)',
+          'bg-lift': 'rgb(var(--brand-bg-lift) / <alpha-value>)',
+          'bg-deep': 'rgb(var(--brand-bg-deep) / <alpha-value>)',
+          accent: 'rgb(var(--brand-accent) / <alpha-value>)',
+          text: 'rgb(var(--brand-text) / <alpha-value>)',
+        },
       },
-    }
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };
 
 export default config;
-

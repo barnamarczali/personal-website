@@ -1,17 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion } from 'motion/react';
 import ClickSpark from '@/components/ClickSpark';
-import RecommendationInput from '@/components/RecommendationInput';
-
-const socials = [
-  { name: 'github', url: 'https://github.com/barnamarczali' },
-  { name: 'linkedin', url: 'https://linkedin.com/in/barnamarczali' },
-  { name: 'x', url: 'https://x.com/barnamarczali' },
-  { name: 'email', url: 'mailto:marczali.barna@gmail.com' },
-  { name: 'discord', url: 'https://discord.com/users/189419600000188416' },
-  { name: 'telegram', url: 'https://t.me/barnamarczali' },
-];
+import CommandPalette from '@/components/CommandPalette';
+import GuitarStrings from '@/components/GuitarStrings';
+import Landing from '@/components/Landing';
+import About from '@/components/views/About';
+import Projects from '@/components/views/Projects';
+import Writing from '@/components/views/Writing';
+import Music from '@/components/views/Music';
+import Contact from '@/components/views/Contact';
+import { NowPlaying, type Song } from '@/components/ui';
+import { socials } from '@/lib/data/socials';
+import { ScrollContainerContext, useKeySequence, useTimeOfDay } from '@/lib/hooks';
+import { SPRING_SNAPPY } from '@/lib/motion';
 
 const menuItems = [
   { name: 'about me', id: 'about' },
@@ -21,1000 +24,9 @@ const menuItems = [
   { name: 'contact', id: 'contact' },
 ];
 
-const AboutContent = () => {
-  return (
-    <div className="about-content-wrapper relative">
-      <div className="section-content">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl md:text-2xl font-light text-brand-accent">whoami?</h2>
-          <img 
-            src="/git_pfp.png" 
-            alt="barna marczali" 
-            className="h-14 w-14 md:h-16 md:w-16 lg:h-20 lg:w-20 rounded-full object-cover relative z-0"
-          />
-        </div>
-        <p className="text-base md:text-lg font-light leading-relaxed mb-4">
-          hi! i'm barna marczali, a builder, tech enthusiast, and entrepreneur on the east-coast of the usa, 
-          studying computer science and economics at johns hopkins university. my countless interests include startups, 
-          ai, ml, web dev ui/ux, fintech, music, football–the real one ;)–and more.
-        </p>
-        <p className="text-base md:text-lg font-light leading-relaxed mb-4">
-          always looking for new challenges and opportunities to learn and grow, i am determined to make a positive impact 
-          on the world with social-consumer technology that will make the difference. currently building 
-          <a href="https://www.dayli.social" className="text-brand-accent hover:text-brand-accent/80 transition-colors" target="_blank" rel="noopener noreferrer"> dayli</a>
-        </p>
-        <p className="text-base md:text-lg font-light leading-relaxed mb-8">
-          so welcome to my site, i hope you find it–and what i do–useful! please feel free to reach out on any of the platforms 
-          if you think we can learn together, build something cool, or just to chat! i love to connect with anyone interested in similar or 
-          completely different fields :)
-        </p>
-      </div>
-
-      <div className="section-content">
-        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">education</h2>
-        <div className="space-y-8 mb-12">
-          <div className="flex items-center gap-4">
-            <a 
-              href="https://en.wikipedia.org/wiki/Johns_Hopkins_University"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-            >
-              <img 
-                src="/jhu.png" 
-                alt="Johns Hopkins University" 
-                className="h-12 w-12 object-contain"
-                style={{
-                  filter: 'brightness(0) invert(1)',
-                  opacity: 0.95
-                }}
-              />
-            </a>
-            <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-              computer science & economics [at] johns hopkins university <br />
-              [2023-2027]
-            </p>
-          </div>
-          <div className="flex items-center gap-4">
-            <a 
-              href="https://en.wikipedia.org/wiki/National_University_of_Singapore"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-            >
-              <img 
-                src="/nus.png" 
-                alt="National University of Singapore" 
-                className="h-12 w-12 object-contain"
-              />
-            </a>
-            <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-              engineering exchange [at] national university of singapore <br />
-              [2025]
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="section-content">
-        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">experience</h2>
-        <div className="relative mb-12 -ml-1 md:-ml-2">
-          {/* Continuous vertical line */}
-          <div className="absolute left-[3rem] md:left-[3.8rem] top-0 bottom-0 w-px bg-brand-accent/30"></div>
-          
-          {/* Timeline entries */}
-          <div className="space-y-0">
-            {/* 2025 - Startup Founder */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  co-founder, cto/coo at dayli <span className="text-brand-text/60">(baltimore, md)</span>
-                </p>
-              </div>
-            </div>
-            
-            {/* 2025 - VC Intern */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  summer vc intern at day1 capital <span className="text-brand-text/60">(budapest, hungary)</span>
-                </p>
-              </div>
-            </div>
-            
-            {/* 2025 - Johns Hopkins Algorithmic Trading Club */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2025</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  co-founder & developer at johns hopkins algorithmic trading club <span className="text-brand-text/60">(baltimore, md)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2024 - Startup Founder */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  co-founder, cto at spark.ai <span className="text-brand-text/60">(baltimore, md)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2024 - JHU Sports Analytics */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  python developer at johns hopkins sports analytics research group <span className="text-brand-text/60">(baltimore, md)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2024 - AMA @ JHU */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2024</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  vice president of consulting & board member at american marketing association @ jhu - nest strategies consulting <span className="text-brand-text/60">(baltimore, md)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2023 - JHU Economics Club */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2023</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  team lead, leader assistant & board member at johns hopkins university economics club <span className="text-brand-text/60">(baltimore, md)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2022 - ASP Group */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  private equity associate intern at asp group <span className="text-brand-text/60">(vienna, austria)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2022 - Enpulsion */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  marketing intern at enpulsion gmbh <span className="text-brand-text/60">(vienna, austria)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2022 - Milestone Business Society */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2022</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  co-founder & president at milestone business society <span className="text-brand-text/60">(budapest, hungary)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2021 - Tesztallomas.hu */}
-            <div className="flex gap-2 md:gap-2 items-start pb-8">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2021</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  co-creator at tesztallomas.hu <span className="text-brand-text/60">(budapest, hungary)</span>
-                </p>
-              </div>
-            </div>
-
-            {/* 2020 - Urban AI Parking Assistant */}
-            <div className="flex gap-2 md:gap-2 items-start">
-              <span className="text-sm md:text-base lg:text-lg font-light text-brand-text/60 whitespace-nowrap w-9 md:w-12 text-right">2020</span>
-              <div className="relative flex items-start pt-[0.45rem] md:pt-[0.55rem]">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-brand-accent z-10"></div>
-              </div>
-              <div className="flex-1 pt-0">
-                <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-                  co-founder at urban ai parking assistant <span className="text-brand-text/60">(budapest, hungary)</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="section-content">
-        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">skills</h2>
-        <div className="space-y-4 md:space-y-6 mb-8">
-          <div className="flex flex-wrap gap-2">
-            {[
-              { name: 'react', url: 'https://en.wikipedia.org/wiki/React_(software)' },
-              { name: 'next.js', url: 'https://en.wikipedia.org/wiki/Next.js' },
-              { name: 'html', url: 'https://en.wikipedia.org/wiki/HTML' },
-              { name: 'css', url: 'https://en.wikipedia.org/wiki/CSS' },
-              { name: 'java', url: 'https://en.wikipedia.org/wiki/Java_(programming_language)' },
-              { name: 'javascript', url: 'https://en.wikipedia.org/wiki/JavaScript' },
-              { name: 'python', url: 'https://en.wikipedia.org/wiki/Python_(programming_language)' },
-              { name: 'pytorch', url: 'https://en.wikipedia.org/wiki/PyTorch' },
-              { name: 'c/c++', url: 'https://en.wikipedia.org/wiki/C%2B%2B' },
-              { name: 'sql', url: 'https://en.wikipedia.org/wiki/SQL' },
-              { name: 'r', url: 'https://en.wikipedia.org/wiki/R_(programming_language)' },
-              { name: 'solidity', url: 'https://en.wikipedia.org/wiki/Solidity' },
-              { name: 'solidworks', url: 'https://en.wikipedia.org/wiki/SolidWorks' },
-            ].map((skill) => (
-              <a
-                key={skill.name}
-                href={skill.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
-                style={{
-                  backgroundColor: 'rgba(229, 143, 101, 0.15)',
-                }}
-              >
-                {skill.name}
-              </a>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              { name: 'financial analysis', url: 'https://en.wikipedia.org/wiki/Financial_analysis' },
-              { name: 'algorithmic trading', url: 'https://en.wikipedia.org/wiki/Algorithmic_trading' },
-              { name: 'quantconnect', url: 'https://en.wikipedia.org/wiki/QuantConnect' },
-            ].map((skill) => (
-              <a
-                key={skill.name}
-                href={skill.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
-                style={{
-                  backgroundColor: 'rgba(107, 114, 128, 0.15)',
-                }}
-              >
-                {skill.name}
-              </a>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              { name: 'hungarian', url: 'https://en.wikipedia.org/wiki/Hungarian_language' },
-              { name: 'english', url: 'https://en.wikipedia.org/wiki/English_language' },
-              { name: 'spanish', url: 'https://en.wikipedia.org/wiki/Spanish_language' },
-              { name: 'hebrew', url: 'https://en.wikipedia.org/wiki/Hebrew_language' },
-            ].map((skill) => (
-              <a
-                key={skill.name}
-                href={skill.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
-                style={{
-                  backgroundColor: 'rgba(147, 197, 253, 0.15)',
-                }}
-              >
-                {skill.name}
-              </a>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              { name: 'electric guitar', url: 'https://en.wikipedia.org/wiki/Electric_guitar' },
-              { name: 'acoustic guitar', url: 'https://en.wikipedia.org/wiki/Acoustic_guitar' },
-              { name: 'flamenco guitar', url: 'https://en.wikipedia.org/wiki/Flamenco_guitar' },
-              { name: 'salsa', url: 'https://en.wikipedia.org/wiki/Salsa_(dance)' },
-            ].map((skill) => (
-              <a
-                key={skill.name}
-                href={skill.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
-                style={{
-                  backgroundColor: 'rgba(252, 211, 77, 0.15)',
-                }}
-              >
-                {skill.name}
-              </a>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              { name: 'football', url: 'https://en.wikipedia.org/wiki/Association_football' },
-              { name: 'tennis', url: 'https://en.wikipedia.org/wiki/Tennis' },
-              { name: 'scuba diving', url: 'https://en.wikipedia.org/wiki/Scuba_diving' },
-            ].map((skill) => (
-              <a
-                key={skill.name}
-                href={skill.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2 py-0.5 rounded-sm text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
-                style={{
-                  backgroundColor: 'rgba(134, 239, 172, 0.15)',
-                }}
-              >
-                {skill.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="section-content">
-        <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">interests</h2>
-        <div className="flex flex-wrap gap-2 md:gap-2.5 mb-16 md:mb-24">
-          {[
-            { name: 'startups', url: 'https://en.wikipedia.org/wiki/Startup_company' },
-            { name: 'chess', url: 'https://en.wikipedia.org/wiki/Chess' },
-            { name: 'ai', url: 'https://en.wikipedia.org/wiki/Artificial_intelligence' },
-            { name: 'ml', url: 'https://en.wikipedia.org/wiki/Machine_learning' },
-            { name: 'social entrepreneurship', url: 'https://en.wikipedia.org/wiki/Social_entrepreneurship' },
-            { name: 'mixing', url: 'https://en.wikipedia.org/wiki/Audio_mixing' },
-            { name: 'padel', url: 'https://en.wikipedia.org/wiki/Padel' },
-            { name: 'cooking', url: 'https://en.wikipedia.org/wiki/Cooking' },
-            { name: 'spy-fictions', url: 'https://en.wikipedia.org/wiki/Spy_fiction' },
-            { name: 'classics', url: 'https://en.wikipedia.org/wiki/Classic_book' },
-            { name: 'defense/security tech', url: 'https://en.wikipedia.org/wiki/Defense_technology' },
-            { name: 'consumer tech', url: 'https://en.wikipedia.org/wiki/Consumer_electronics' },
-            { name: 'robotics', url: 'https://en.wikipedia.org/wiki/Robotics' },
-            { name: 'writing', url: 'https://en.wikipedia.org/wiki/Writing' },
-          ].map((interest) => (
-            <a
-              key={interest.name}
-              href={interest.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-2.5 md:px-3 py-0.5 md:py-1 rounded-md text-sm md:text-base lg:text-lg font-light leading-relaxed hover:opacity-80 transition-opacity"
-              style={{
-                backgroundColor: 'rgba(229, 143, 101, 0.12)',
-              }}
-            >
-              {interest.name}
-            </a>
-          ))}
-          <div className="w-full">
-            <div className="h-4 md:h-6" />
-            <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-              if you share any of these interests or found my site useful, feel free to reach out!
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const CONTENT_VIEWS: {
-  about: () => JSX.Element;
-  projects: () => JSX.Element;
-  writing: () => JSX.Element;
-  music: (currentSong: { title: string; url: string }) => JSX.Element;
-  contact: () => JSX.Element;
-} = {
-  about: () => <AboutContent />,
-  projects: () => (
-    <div>
-      <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">some things i've built...</h2>
-      <div className="space-y-3 md:space-y-4">
-        {/* dayli.social */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">dayli</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              a social app to help everyone not lose their friends and people who are important to them, 
-              and to encourage real connection in a world where everyone is so preocccupied with work, "social" 
-              media, and the other millions of distractions
-            </p>
-          </div>
-          <a
-            href="https://www.dayli.social"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
-            title="Visit website"
-          >
-            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
-
-        {/* building a robot in 48hrs */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">building a robot in 48hrs</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              we built a full stack, fully functional land robot in limited time, from 0 to 1, to launch the bme robotics club with its first successful project. read our blog for more
-            </p>
-          </div>
-          <a
-            href="https://www.bmerobotics.hu/newsroom/1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
-            title="Visit website"
-          >
-            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
-
-        {/* tremolo */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">tremolo</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              real-time speech coach overlay for video calls: tracks pace, filler words, eye contact, and star method responses... built for nexhacks at cmu
-            </p>
-          </div>
-          <a
-            href="https://github.com/BigBoa19/NexHacks"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
-            title="View on GitHub"
-          >
-            <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-            </svg>
-          </a>
-        </div>
-
-        {/* personal website */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">personal website</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              this very site :) let me know how to improve it!
-            </p>
-          </div>
-          <a
-            href="https://github.com/barnamarczali/personal-website"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
-            title="View on GitHub"
-          >
-            <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-            </svg>
-          </a>
-        </div>
-
-        {/* StudocuOnChain */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">studocu on-chain</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              a decentralized, open-source document-sharing platform built on ethereum, based on the popular platform studocu, with working minimal product deployed on vercel
-            </p>
-          </div>
-          <div className="flex gap-2 flex-shrink-0 mt-1 self-end md:self-start">
-            <a
-              href="https://github.com/Arnie016/StudocuOnChain"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-text hover:text-brand-accent transition-colors duration-300"
-              title="View on GitHub"
-            >
-              <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-              </svg>
-            </a>
-            <a
-              href="https://interface-demo-vert.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-text hover:text-brand-accent transition-colors duration-300"
-              title="Visit website"
-            >
-              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        {/* i-know-where-you-live */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">i know where you live / terminail</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              osint profiling tool built for the cursor hackathon singapore where you can look up anyone and get a detailed profile built 
-              on them based on publicly available information on the internet
-            </p>
-          </div>
-          <a
-            href="https://github.com/budaic/i-know-where-you-live"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
-            title="View on GitHub"
-          >
-            <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-            </svg>
-          </a>
-        </div>
-
-        {/* usespark.ai */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">spark.ai</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              an ai-powered "online yc" platform to guide founders from idea to mvp
-            </p>
-          </div>
-          <a
-            href="https://www.usespark.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
-            title="Visit website"
-          >
-            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
-
-        {/* bridgewayworld.com */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300 hover:bg-opacity-20"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">bridgeway world</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              building a community in higher education based on mentorship, collaboration, and professional opportunities
-            </p>
-          </div>
-          <a
-            href="https://www.bridgewayworld.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-text hover:text-brand-accent transition-colors duration-300 flex-shrink-0 mt-1 self-end md:self-start"
-            title="Visit website"
-          >
-            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
-
-        {/* algorithmic trading services */}
-        <div 
-          className="flex flex-col md:flex-row items-start gap-2 md:gap-3 p-3 md:p-4 rounded-lg transition-all duration-300"
-          style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}
-        >
-          <div className="flex-1 w-full">
-            <h3 className="text-lg md:text-xl font-light mb-1 text-brand-accent">algorithmic trading services</h3>
-            <p className="text-sm md:text-base font-light leading-relaxed mb-2">
-              algorithmic trading strategies as a service
-            </p>
-          </div>
-          <div className="text-brand-text/40 flex-shrink-0 mt-1 text-xs md:text-sm font-light self-end md:self-start">
-            coming soon...
-          </div>
-        </div>
-      </div>
-    </div>
-  ),
-  writing: () => (
-    <div className="flex flex-col items-center w-full px-4 md:px-0">
-      <div className="flex items-center justify-center mb-4">
-        <p className="text-base md:text-lg font-light leading-relaxed">
-          still typing...
-        </p>
-        <div className="ml-2 relative inline-block animate-spin" style={{ width: '1.4rem', height: '1.4rem', animationDuration: '1s' }}>
-          <img 
-            src="/beachball.svg" 
-            alt="loading" 
-            decoding="async"
-            data-nimg="intrinsic"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 0,
-              boxSizing: 'border-box',
-              padding: 0,
-              border: 'none',
-              margin: 'auto',
-              display: 'block',
-              width: 0,
-              height: 0,
-              minWidth: '100%',
-              maxWidth: '100%',
-              minHeight: '100%',
-              maxHeight: '100%'
-            }}
-            srcSet="/beachball.svg 1x, /beachball.svg 2x"
-          />
-        </div>
-      </div>
-
-      {/* Writing Request Input */}
-      <div style={{ width: '100%', minWidth: '250px', maxWidth: '400px' }}>
-        <RecommendationInput placeholder="what should i write about next?" type="writing" width="full" />
-      </div>
-    </div>
-  ),
-  music: (currentSong: { title: string; url: string }) => (
-    <div className="px-4 md:px-0">
-      <h2 className="text-xl md:text-2xl font-light mb-4 flex items-center gap-3 flex-wrap">
-        <span className="text-brand-accent">currently listening to: </span>
-        {/* Animated music bars with link and hover title */}
-        <div className="group flex items-center gap-2">
-          <a 
-            href={currentSong.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-end gap-[3px] h-5 hover:opacity-80 transition-opacity cursor-pointer"
-          >
-            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-1" />
-            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-2" />
-            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-3" />
-            <div className="w-[3px] bg-brand-accent rounded-full animate-music-bar-4" />
-          </a>
-          <span className="text-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {currentSong.title}
-          </span>
-        </div>
-      </h2>
-      <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed mb-6"> 
-        here, i try to curate some recommendations, display my playlists, and hopefully share some of my own music in the future.
-      </p>
-      
-      {/* Playlists */}
-      <div className="flex flex-wrap gap-3 md:gap-4 mb-8 justify-center md:justify-start">
-        {[
-          { emoji: '🏠', title: 'house', url: 'https://music.apple.com/hu/playlist/pl.u-zPyLLRXFZJ2pYz9' },
-          { emoji: '🍸', title: 'bar', url: 'https://music.apple.com/hu/playlist/pl.u-4Jomm9DIav1Z5B2' },
-          { emoji: '🎶', title: 'scores', url: 'https://music.apple.com/hu/playlist/scores/pl.u-zPyLmjRtZJ2pYz9' },
-          { emoji: '🇭🇺', title: 'hungarian', url: 'https://music.apple.com/hu/playlist/pl.u-pMyllkMc4zkZl8a' },
-          { emoji: '🇮🇹', title: 'italian', url: 'https://music.apple.com/hu/playlist/pl.u-qxylK7BT2PxRBzY' },
-          { emoji: '🎸', title: 'rock', url: 'https://music.apple.com/hu/playlist/pl.u-qxylK7BT2PxRBzY' },
-          { emoji: '🎼', title: 'classical', url: 'https://music.apple.com/hu/playlist/class/pl.u-qxylKqDI2PxRBzY' },
-          { emoji: '🥃', title: 'golden', url: 'https://music.apple.com/hu/playlist/pl.u-XkD04XpHDzLBqVb' },
-          { emoji: '🎷', title: '(some) jazz', url: 'https://music.apple.com/hu/playlist/pl.u-zPyLm03TZJ2pYz9' },
-          { emoji: '🦇', title: '(some) opera', url: 'https://music.apple.com/hu/playlist/opera/pl.u-qxylK46t2PxRBzY' },
-        ].map((playlist, index) => (
-          <div key={index} className="group flex flex-col items-center w-[48px]">
-            <a
-              href={playlist.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-3xl hover:scale-110 transition-transform duration-200 inline-block"
-            >
-              {playlist.emoji}
-            </a>
-            <span className="mt-2 text-sm font-light text-brand-text text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-              {playlist.title}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Music Profile Links */}
-      <div className="flex justify-center gap-8">
-        {/* Apple Music */}
-        <div className="group relative">
-          <a
-            href="https://music.apple.com/profile/barnamarczali"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-110 transition-transform duration-200 block"
-          >
-            <img 
-              src="/Apple_Music_icon.svg.png" 
-              alt="Apple Music Profile" 
-              className="h-8 w-8 object-contain"
-            />
-          </a>
-          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-base font-light text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-            follow me for more
-          </span>
-        </div>
-
-        {/* SoundCloud */}
-        <div className="group relative">
-          <a
-            href="https://on.soundcloud.com/yb21Ek8VYdppd2MFGM"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-110 transition-transform duration-200 block"
-          >
-            <img 
-              src="/soundcloud.png" 
-              alt="SoundCloud Profile" 
-              className="h-8 w-8 object-contain"
-            />
-          </a>
-          <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-base font-light text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-            send me gems on soundcloud
-          </span>
-        </div>
-      </div>
-
-      {/* Song Recommendation Input */}
-      <div className="flex justify-center mt-8">
-        <div style={{ width: '40%', minWidth: '180px', maxWidth: '400px' }}>
-          <RecommendationInput placeholder="send me a song" type="song" width="full" />
-        </div>
-      </div>
-    </div>
-  ),
-  contact: () => (
-    <div className="px-4 md:px-0">
-      <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4">reach out!</h2>
-      <p className="text-sm md:text-base lg:text-lg font-light leading-relaxed mb-6">
-        if you are thinking about reaching out, just do it! about anything, anytime, anywhere
-      </p>
-      
-      {/* Social logos */}
-      <div className="flex justify-center items-center gap-4 md:gap-6 mb-8">
-        {/* GitHub */}
-        <a
-          href="https://github.com/barnamarczali"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-7 h-7"
-          title="GitHub"
-        >
-          <img 
-            src="/github-icon.svg" 
-            alt="GitHub" 
-            className="w-full h-full object-contain transition-all duration-300"
-            style={{
-              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
-            }}
-          />
-        </a>
-
-        {/* LinkedIn */}
-        <a
-          href="https://linkedin.com/in/barnamarczali"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-9 h-9"
-          title="LinkedIn"
-        >
-          <img 
-            src="/linkedin-icon-logo-svg-vector.svg" 
-            alt="LinkedIn" 
-            className="w-full h-full object-contain transition-all duration-300"
-            style={{
-              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
-            }}
-          />
-        </a>
-
-        {/* X (Twitter) */}
-        <a
-          href="https://x.com/barnamarczali"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-5 h-5"
-          title="X (Twitter)"
-        >
-          <img 
-            src="/X_logo_2023_original.svg" 
-            alt="X" 
-            className="w-full h-full object-contain transition-all duration-300"
-            style={{
-              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
-            }}
-          />
-        </a>
-
-        {/* Discord */}
-        <a
-          href="https://discord.com/users/189419600000188416"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-7 h-7"
-          title="Discord"
-        >
-          <img 
-            src="/discord-icon.svg" 
-            alt="Discord" 
-            className="w-full h-full object-contain transition-all duration-300"
-            style={{
-              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
-            }}
-          />
-        </a>
-
-        {/* Threads */}
-        <a
-          href="https://www.threads.net/@barnamarczali"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-6 h-6"
-          title="Threads"
-        >
-          <img 
-            src="/threads.svg" 
-            alt="Threads" 
-            className="w-full h-full object-contain transition-all duration-300"
-            style={{
-              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
-            }}
-          />
-        </a>
-
-        {/* Telegram */}
-        <a
-          href="https://t.me/barnamarczali"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-9 h-9"
-          title="Telegram"
-        >
-          <img 
-            src="/telegram.svg" 
-            alt="Telegram" 
-            className="w-full h-full object-contain transition-all duration-300"
-            style={{
-              filter: 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%) contrast(89%)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%) contrast(105%)';
-            }}
-          />
-        </a>
-      </div>
-
-      {/* Email and Calendly with animated underlines */}
-      <div className="space-y-4">
-        <div className="text-sm md:text-base lg:text-lg font-light leading-relaxed break-words">
-          best way to make sure your message gets to me {'->'}{' '}
-          <a 
-            href="mailto:marczali.barna@gmail.com"
-            className="group relative inline-flex items-center gap-1 md:gap-2"
-          >
-            <span className="relative break-all">
-              marczali.barna@gmail.com
-              <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-text origin-left scale-x-100"></span>
-              <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"></span>
-            </span>
-            <svg 
-              className="w-4 h-4 md:w-5 md:h-5 text-brand-text group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300 flex-shrink-0" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7V17" />
-            </svg>
-          </a>
-        </div>
-        <div className="text-sm md:text-base lg:text-lg font-light leading-relaxed">
-          or{' '}
-          <a 
-            href="https://calendly.com/marczali-barna/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-1 md:gap-2"
-          >
-            <span className="relative">
-              schedule a call with me
-              <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-text origin-left scale-x-100"></span>
-              <span className="absolute left-0 bottom-0 w-full h-[1px] bg-brand-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"></span>
-            </span>
-            <svg 
-              className="w-4 h-4 md:w-5 md:h-5 text-brand-text group-hover:text-brand-accent transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300 flex-shrink-0" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7V17" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  ),
-};
+const VIEW_IDS = menuItems.map((item) => item.id);
+const FALLBACK_SONG: Song = { title: 'humans', url: 'https://en.wikipedia.org/wiki/Human' };
+const VIEW_TRANSITION_MS = 450;
 
 export default function Page() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -1022,146 +34,163 @@ export default function Page() {
   const [previousView, setPreviousView] = useState<string | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
-  const [currentSong, setCurrentSong] = useState<{ title: string; url: string }>({ title: 'humans', url: 'https://en.wikipedia.org/wiki/Human' });
+  const [currentSong, setCurrentSong] = useState<Song>(FALLBACK_SONG);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [strumOpen, setStrumOpen] = useState(false);
 
-  // Fetch current song on mount and when music view is opened
-  useEffect(() => {
-    const fetchCurrentSong = async () => {
-      try {
-        const response = await fetch('/api/current-song');
-        const data = await response.json();
-        if (data.currentSong) {
-          setCurrentSong(data.currentSong);
-        }
-      } catch (error) {
-        console.error('Error fetching current song:', error);
-      }
-    };
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-    fetchCurrentSong();
+  useTimeOfDay();
+
+  /* ---------------------------------------------------------------------- */
+  /*  Now playing                                                           */
+  /* ---------------------------------------------------------------------- */
+
+  const fetchCurrentSong = useCallback(async () => {
+    try {
+      const response = await fetch('/api/current-song');
+      const data = await response.json();
+      if (data.currentSong) setCurrentSong(data.currentSong);
+    } catch {
+      // Keep whatever is on screen; the landing falls back to the default.
+    }
   }, []);
 
-  // Refresh current song when navigating to music view
   useEffect(() => {
-    if (currentView === 'music') {
-      const fetchCurrentSong = async () => {
-        try {
-          const response = await fetch('/api/current-song');
-          const data = await response.json();
-          if (data.currentSong) {
-            setCurrentSong(data.currentSong);
-          }
-        } catch (error) {
-          console.error('Error fetching current song:', error);
-        }
-      };
+    void fetchCurrentSong();
+  }, [fetchCurrentSong]);
 
-      fetchCurrentSong();
-    }
-  }, [currentView]);
+  useEffect(() => {
+    if (currentView === 'music') void fetchCurrentSong();
+  }, [currentView, fetchCurrentSong]);
+
+  /* ---------------------------------------------------------------------- */
+  /*  Navigation                                                            */
+  /* ---------------------------------------------------------------------- */
+
+  useEffect(() => {
+    if (!isTransitioning) return;
+    const id = window.setTimeout(() => {
+      setIsTransitioning(false);
+      setPreviousView(null);
+    }, VIEW_TRANSITION_MS);
+    return () => window.clearTimeout(id);
+  }, [isTransitioning, currentView]);
+
+  // Mirrors currentView so goToView can read it without becoming a new callback
+  // on every navigation, and without setting state from inside an updater.
+  const currentViewRef = useRef<string | null>(null);
+
+  const goToView = useCallback((viewId: string, options: { pushUrl?: boolean } = {}) => {
+    const { pushUrl = true } = options;
+    if (!VIEW_IDS.includes(viewId)) return;
+
+    setIsExpanded(true);
+    if (pushUrl) window.history.replaceState(null, '', `?v=${viewId}`);
+
+    const current = currentViewRef.current;
+    if (current === viewId) return;
+
+    const currentIndex = current ? VIEW_IDS.indexOf(current) : -1;
+    const nextIndex = VIEW_IDS.indexOf(viewId);
+
+    currentViewRef.current = viewId;
+    setScrollDirection(nextIndex > currentIndex ? 'down' : 'up');
+    setPreviousView(current);
+    setCurrentView(viewId);
+    setIsTransitioning(true);
+    scrollRef.current?.scrollTo({ top: 0 });
+  }, []);
+
+  const handleMenuClick = (viewId: string) => {
+    if (currentView === viewId || isTransitioning) return;
+    goToView(viewId);
+  };
 
   const handleExpand = () => {
     setIsExpanded(true);
-    // Set initial view to "about me" after animation starts
-    setTimeout(() => {
-      setCurrentView('about');
-    }, 400);
+    window.setTimeout(() => goToView('about'), 380);
   };
 
-  const handleMenuClick = (itemId: string) => {
-    if (currentView === itemId || isTransitioning) return;
-
-    // Determine scroll direction based on menu item order
-    const currentIndex = currentView ? menuItems.findIndex(item => item.id === currentView) : -1;
-    const newIndex = menuItems.findIndex(item => item.id === itemId);
-    
-    // If going forward in menu (0->1, 1->2, etc.), scroll down
-    // If going backward (1->0, 2->1, etc.), scroll up
-    const direction = newIndex > currentIndex ? 'down' : 'up';
-    setScrollDirection(direction);
-
-    // Start transition immediately - both animations happen simultaneously
-    setPreviousView(currentView);
-    setIsTransitioning(true);
-    setCurrentView(itemId);
-    
-    // Clear transition state after animation completes
-    setTimeout(() => {
-      setIsTransitioning(false);
-      setPreviousView(null);
-    }, 598);
+  const collapse = () => {
+    currentViewRef.current = null;
+    setIsExpanded(false);
+    setCurrentView(null);
+    setPreviousView(null);
+    window.history.replaceState(null, '', window.location.pathname);
   };
+
+  // Deep links: ?v=music lands straight there, back and forward walk the menu.
+  useEffect(() => {
+    const applyFromUrl = (allowCollapse: boolean) => {
+      const view = new URLSearchParams(window.location.search).get('v');
+      if (view && VIEW_IDS.includes(view)) {
+        goToView(view, { pushUrl: false });
+      } else if (allowCollapse) {
+        currentViewRef.current = null;
+        setIsExpanded(false);
+        setCurrentView(null);
+        setPreviousView(null);
+      }
+    };
+
+    applyFromUrl(false);
+    const onPopState = () => applyFromUrl(true);
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, [goToView]);
+
+  /* ---------------------------------------------------------------------- */
+  /*  Command palette and easter egg                                        */
+  /* ---------------------------------------------------------------------- */
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        setPaletteOpen((open) => !open);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  const openStrum = useCallback(() => setStrumOpen(true), []);
+  useKeySequence('strum', openStrum);
+
+  const paletteNavigate = useCallback((viewId: string) => goToView(viewId), [goToView]);
+
+  /* ---------------------------------------------------------------------- */
+  /*  Rendering                                                             */
+  /* ---------------------------------------------------------------------- */
 
   const renderContent = (view: string | null) => {
-    if (!view) return null;
-    
-    if (view === 'music') {
-      return CONTENT_VIEWS.music(currentSong);
+    switch (view) {
+      case 'about':
+        return <About />;
+      case 'projects':
+        return <Projects />;
+      case 'writing':
+        return <Writing />;
+      case 'music':
+        return <Music song={currentSong} />;
+      case 'contact':
+        return <Contact />;
+      default:
+        return null;
     }
-    
-    const contentView = CONTENT_VIEWS[view as keyof typeof CONTENT_VIEWS];
-    if (typeof contentView === 'function' && view !== 'music') {
-      return (contentView as () => JSX.Element)();
-    }
-    
-    return null;
   };
 
   return (
-    <ClickSpark
-      sparkColor="#E58F65"
-      sparkSize={9}
-      sparkRadius={18}
-      sparkCount={7}
-      duration={500}
-    >
-      <main className="min-h-screen relative overflow-y-auto">
-        {/* Initial centered view */}
+    <ClickSpark sparkColor="#E58F65" sparkSize={9} sparkRadius={18} sparkCount={7} duration={500}>
+      <main className="relative min-h-[100dvh] overflow-hidden">
+        {/* Collapsed landing */}
         <div
-          className={`absolute inset-0 flex items-center justify-center p-4 md:p-8 transition-opacity duration-[330ms] z-30 ${
-            isExpanded
-              ? 'opacity-0 pointer-events-none'
-              : 'opacity-100'
+          className={`absolute inset-0 flex items-center justify-center p-6 md:p-12 transition-opacity duration-[330ms] z-30 ${
+            isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
         >
-          <div className="flex flex-col items-start -translate-x-4 md:-translate-x-8 -translate-y-8 md:-translate-y-12">
-            <button
-              onClick={handleExpand}
-              className="flex items-center gap-2 group mb-4 md:mb-6 cursor-pointer bg-transparent border-none p-0"
-            >
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-brand-text group-hover:text-brand-accent transition-colors duration-300">
-                barna marczali
-              </h1>
-              <svg
-                className="w-6 h-6 md:w-8 md:h-8 text-brand-text group-hover:text-brand-accent transition-all duration-300 translate-y-0.5 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </button>
-
-            <nav className="flex flex-wrap gap-6 md:gap-12 lg:gap-18">
-              {socials.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-brand-text hover:text-brand-accent transition-colors duration-300 text-xs md:text-sm lg:text-base font-light"
-                >
-                  {social.name}
-                </a>
-              ))}
-            </nav>
-          </div>
+          <Landing onExpand={handleExpand} song={currentSong} />
         </div>
 
         {/* Expanded layout */}
@@ -1170,117 +199,144 @@ export default function Page() {
             isExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
-          {/* Header with name */}
-          <div
-            className={`fixed top-4 left-4 md:top-8 md:left-8 transition-all duration-[520ms] delay-[130ms] z-20 ${
-              isExpanded ? 'translate-x-0 translate-y-0 scale-100 opacity-100' : 'translate-x-[calc(50vw-2rem)] translate-y-[calc(50vh-2rem)] scale-[0.3] opacity-0'
+          <button
+            onClick={collapse}
+            aria-label="back to the start"
+            className={`fixed top-4 left-4 md:top-8 md:left-8 z-30 transition-all duration-[520ms] delay-[130ms] ${
+              isExpanded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
             }`}
-            style={{
-              transformOrigin: 'top left',
-            }}
           >
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-light text-brand-text">
+            <span className="text-xl md:text-2xl font-light tracking-tight text-brand-text hover:text-brand-accent transition-colors duration-300">
               barna marczali
-            </h1>
-          </div>
+            </span>
+          </button>
 
-          {/* Menu items - Desktop: vertical left sidebar, Mobile: horizontal bottom bar */}
+          {/* Menu: left rail on desktop, bottom row on mobile */}
           <nav
+            aria-label="sections"
             className={`fixed md:top-24 md:left-8 bottom-16 left-0 right-0 md:bottom-auto md:right-auto flex md:flex-col flex-row md:gap-4 gap-2 justify-around md:justify-start px-4 md:px-0 transition-all duration-[520ms] delay-[195ms] z-20 ${
-              isExpanded ? 'md:translate-x-0 translate-y-0 opacity-100' : 'md:-translate-x-full translate-y-full opacity-0'
+              isExpanded
+                ? 'md:translate-x-0 translate-y-0 opacity-100'
+                : 'md:-translate-x-full translate-y-full opacity-0'
             }`}
           >
-            {menuItems.map((item, index) => (
+            {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleMenuClick(item.id)}
-                className={`md:text-left text-center text-sm md:text-lg font-light transition-colors duration-0 cursor-pointer bg-transparent border-none p-0 ${
+                aria-current={currentView === item.id ? 'page' : undefined}
+                className={`relative md:text-left text-center text-sm md:text-lg transition-colors duration-150 cursor-pointer bg-transparent border-none p-0 ${
                   currentView === item.id
-                    ? 'text-brand-accent'
-                    : 'text-brand-text hover:text-brand-accent'
+                    ? 'text-brand-accent font-medium'
+                    : 'text-brand-text/85 hover:text-brand-accent font-light'
                 }`}
-                style={{
-                  transitionDelay: `${195 + index * 39}ms`,
-                  transitionProperty: 'opacity, transform',
-                }}
               >
+                {currentView === item.id && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    transition={SPRING_SNAPPY}
+                    className="absolute w-1.5 h-1.5 rounded-full bg-brand-accent inset-x-0 mx-auto bottom-[-0.5rem] md:inset-x-auto md:mx-0 md:bottom-auto md:inset-y-0 md:my-auto md:left-[-0.95rem]"
+                  />
+                )}
                 {item.name}
               </button>
             ))}
           </nav>
 
-          {/* Main content */}
-          <div
-            className={`${
-              currentView === 'about' 
-                ? 'w-full' 
-                : 'absolute inset-0 overflow-y-auto'
-            } transition-all duration-[520ms] delay-[325ms] z-10 ${
-              isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-            }`}
-          >
-            <div className={`${
-              currentView === 'about' 
-                ? 'w-full' 
-                : 'min-h-full flex items-center justify-center px-4 md:px-8 lg:px-16 xl:px-32 pointer-events-none'
-            }`}
-            style={{
-              paddingTop: currentView === 'about' ? '4rem' : '5rem',
-              paddingBottom: currentView === 'about' ? '6rem' : '8rem'
-            }}
+          {/* One scroll container for every view, so switching never moves the origin. */}
+          <ScrollContainerContext.Provider value={scrollRef}>
+            <div
+              ref={scrollRef}
+              className={`scroll-area absolute inset-0 overflow-y-auto overflow-x-hidden z-0 pt-20 md:pt-24 pb-36 md:pb-28 px-5 md:px-10 lg:px-[8.5rem] xl:px-[10rem] transition-opacity duration-[520ms] delay-[325ms] ${
+                isExpanded ? 'opacity-100' : 'opacity-0'
+              }`}
             >
-              <div className={`relative ${
-                currentView === 'about' 
-                  ? 'w-full' 
-                  : 'max-w-2xl w-full page-content-wrapper'
-              } text-brand-text ${currentView === 'about' ? '' : 'pointer-events-auto'}`}>
-              {/* Previous content (exiting) */}
-              {previousView && (
-                <div
-                  className={`page-content-layer page-content-exit-${scrollDirection}`}
-                >
-                  {renderContent(previousView)}
-                </div>
-              )}
-              
-              {/* Current content (entering) */}
-              {currentView && (
-                <div
-                  className={`page-content-current ${
-                    isTransitioning || previousView
-                      ? `page-content-enter-${scrollDirection}`
-                      : ''
-                  }`}
-                >
-                  {renderContent(currentView)}
-                </div>
-              )}
-            </div>
-            </div>
-          </div>
+              <div className="page-content-wrapper w-full">
+                {previousView && (
+                  <div className={`page-content-layer page-content-exit-${scrollDirection}`} aria-hidden="true">
+                    {renderContent(previousView)}
+                  </div>
+                )}
 
-          {/* Social links at bottom - fixed footer */}
-          <nav
-            className={`fixed bottom-2 md:bottom-8 left-0 right-0 flex justify-center gap-4 md:gap-8 lg:gap-12 transition-all duration-[520ms] delay-[260ms] z-20 ${
-              isExpanded ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-[calc(-50vh+2rem)] scale-[0.3] opacity-0'
+                {currentView && (
+                  <div
+                    key={currentView}
+                    className={`page-content-current ${
+                      isTransitioning || previousView ? `page-content-enter-${scrollDirection}` : ''
+                    }`}
+                  >
+                    {renderContent(currentView)}
+                  </div>
+                )}
+              </div>
+            </div>
+          </ScrollContainerContext.Provider>
+
+          {/* Ambient status rail. Wide screens only; it sits inside the bottom
+              scrim's fade zone so scrolling content melts out beneath it
+              instead of colliding with the text. */}
+          <aside
+            className={`hidden xl:flex fixed right-8 bottom-[3.75rem] z-20 flex-col items-end gap-1.5 transition-opacity duration-500 delay-[420ms] ${
+              isExpanded ? 'opacity-100' : 'opacity-0'
             }`}
-            style={{
-              transformOrigin: 'bottom center',
-            }}
           >
-            {socials.map((social) => (
-              <a
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-brand-text hover:text-brand-accent transition-colors duration-300 text-xs md:text-sm lg:text-base font-light"
-              >
-                {social.name}
-              </a>
-            ))}
-          </nav>
+            <NowPlaying song={currentSong} />
+            <a
+              href="https://scoutnow.me"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[11px] tracking-wide text-brand-accent/80 hover:text-brand-accent transition-colors duration-300"
+            >
+              building scout
+            </a>
+          </aside>
         </div>
+
+        {/* Progressive scrim: content melts out beneath the fixed chrome. */}
+        <div
+          aria-hidden="true"
+          className="fixed inset-x-0 bottom-0 h-32 md:h-28 z-10 pointer-events-none backdrop-blur-[5px] bg-gradient-to-t from-brand-bg via-brand-bg/70 to-transparent"
+          style={{
+            maskImage: 'linear-gradient(to top, black 58%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to top, black 58%, transparent)',
+          }}
+        />
+
+        {/* Footer socials */}
+        <nav
+          aria-label="social links"
+          className={`fixed bottom-3 md:bottom-8 left-0 right-0 flex justify-center gap-4 md:gap-8 lg:gap-12 z-20 transition-all duration-[520ms] delay-[260ms] ${
+            isExpanded ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0 pointer-events-none'
+          }`}
+        >
+          {socials.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              {...(social.url.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+              className="text-brand-text/85 hover:text-brand-accent transition-colors duration-300 text-xs md:text-sm lg:text-base font-light"
+            >
+              {social.name}
+            </a>
+          ))}
+        </nav>
+
+        <button
+          onClick={() => setPaletteOpen(true)}
+          aria-label="open command palette"
+          className="hidden lg:block fixed bottom-8 right-8 z-20 font-mono text-sm tracking-[0.2em] text-brand-text/40 hover:text-brand-accent transition-colors duration-300"
+        >
+          ⌘K
+        </button>
+
+        <CommandPalette
+          open={paletteOpen}
+          onOpenChange={setPaletteOpen}
+          onNavigate={paletteNavigate}
+          onStrum={openStrum}
+        />
+
+        <GuitarStrings open={strumOpen} onClose={() => setStrumOpen(false)} />
       </main>
     </ClickSpark>
   );

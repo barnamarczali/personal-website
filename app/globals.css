@@ -2,62 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* -------------------------------------------------------------------------- */
+/*  Tokens                                                                    */
+/* -------------------------------------------------------------------------- */
+
 :root {
-  --brand-bg: #063970;
-  --brand-accent: #E58F65;
-  --brand-text: #F1F1E7;
-}
+  /* RGB channel triplets, so Tailwind opacity modifiers work and useTimeOfDay
+     can repaint the whole site by rewriting three custom properties. */
+  --brand-bg: 6 57 112;
+  --brand-bg-lift: 10 74 140;
+  --brand-bg-deep: 4 31 61;
+  --brand-accent: 229 143 101;
+  --brand-text: 241 241 231;
 
-html, body {
-  height: 100%;
-  background: var(--brand-bg);
-  color: var(--brand-text);
-}
+  --surface-1: rgb(var(--brand-text) / 0.05);
+  --surface-2: rgb(var(--brand-text) / 0.09);
+  --hairline: rgb(var(--brand-text) / 0.1);
 
-/* Custom scrollbar on the right side */
-body {
-  scrollbar-width: thin;
-  scrollbar-color: var(--brand-accent) transparent;
-}
-
-body::-webkit-scrollbar {
-  width: 8px;
-}
-
-body::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: var(--brand-accent);
-  border-radius: 4px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-view: 450ms;
+  --duration-exit: 250ms;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+/* Flat navy, no gradient. The grain below is the only thing on top of it, which
+   keeps edges crisp instead of washing them into a wide radial falloff. */
+body {
+  color: rgb(var(--brand-text));
+  background-color: rgb(var(--brand-bg));
+  transition: background-color 1200ms linear;
+}
+
+/* Grain. Fixed and pointer-events-none so it never repaints on scroll. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Scrollbar and focus                                                       */
+/* -------------------------------------------------------------------------- */
+
+body,
+.scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--brand-accent) / 0.6) transparent;
+}
+
+body::-webkit-scrollbar,
+.scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track,
+.scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb,
+.scroll-area::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--brand-accent) / 0.6);
+  border-radius: 4px;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--brand-accent));
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Brand logo recolouring                                                    */
+/* -------------------------------------------------------------------------- */
+
+/* The social SVGs ship in their own brand colours. These filters flatten them
+   to cream, then to peach on hover, inside a real transition. */
+.contact-icon img {
+  filter: brightness(0) saturate(100%) invert(96%) sepia(4%) saturate(0%) hue-rotate(249deg) brightness(105%)
+    contrast(105%);
+  transition: filter var(--duration-normal) var(--ease-out-expo);
+}
+
+.contact-icon:hover img,
+.contact-icon:focus-visible img {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(26%) saturate(734%) hue-rotate(326deg) brightness(94%)
+    contrast(89%);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  View transitions                                                          */
+/* -------------------------------------------------------------------------- */
+
 .page-content-wrapper {
   position: relative;
   overflow: visible;
-}
-
-/* Allow scrolling for about page content */
-.about-content-wrapper {
-  width: 100%;
-  padding: 0;
-  position: relative;
-  overflow: visible;
-}
-
-.section-content {
-  position: relative;
-  padding: 3rem 0;
-  width: 100%;
-  max-width: 42rem;
-  margin: 0 auto;
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .page-content-layer {
@@ -73,34 +127,28 @@ body::-webkit-scrollbar-thumb {
   z-index: 1;
 }
 
-/* Scroll down animations (going forward in menu: 0->1, 1->2, etc.) */
-/* Both old and new content move UP (same direction) */
+/* Short offset rather than a full-viewport slab: the view drifts, and the
+   content inside carries the real choreography via .stagger below. */
 .page-content-enter-down {
-  animation: page-content-enter-down 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
-  animation-fill-mode: both;
+  animation: view-enter-down var(--duration-view) var(--ease-out-expo) both;
 }
 
 .page-content-exit-down {
-  animation: page-content-exit-down 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
-  animation-fill-mode: both;
+  animation: view-exit-down var(--duration-exit) var(--ease-out-expo) both;
 }
 
-/* Scroll up animations (going backward in menu: 1->0, 2->1, etc.) */
-/* Both old and new content move DOWN (same direction) */
 .page-content-enter-up {
-  animation: page-content-enter-up 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
-  animation-fill-mode: both;
+  animation: view-enter-up var(--duration-view) var(--ease-out-expo) both;
 }
 
 .page-content-exit-up {
-  animation: page-content-exit-up 598ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
-  animation-fill-mode: both;
+  animation: view-exit-up var(--duration-exit) var(--ease-out-expo) both;
 }
 
-@keyframes page-content-enter-down {
+@keyframes view-enter-down {
   from {
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
@@ -108,21 +156,21 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-@keyframes page-content-exit-down {
+@keyframes view-exit-down {
   from {
     opacity: 1;
     transform: translateY(0);
   }
   to {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateY(-28px);
   }
 }
 
-@keyframes page-content-enter-up {
+@keyframes view-enter-up {
   from {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateY(-28px);
   }
   to {
     opacity: 1;
@@ -130,29 +178,78 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-@keyframes page-content-exit-up {
+@keyframes view-exit-up {
   from {
     opacity: 1;
     transform: translateY(0);
   }
   to {
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(28px);
   }
 }
 
-/* Ensure nav menu items have instant hover color transitions */
-nav button {
-  transition-property: color;
-  transition-duration: 0ms;
-  transition-delay: 0ms;
+/* -------------------------------------------------------------------------- */
+/*  Stagger cascade                                                           */
+/* -------------------------------------------------------------------------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
-nav button:hover {
-  transition-delay: 0ms !important;
+/* Applied to direct children; --i sets each child's place in the cascade.
+   Fill mode is backwards, not both: the end state equals the natural state,
+   and releasing the animation afterwards lets hover transforms (card lifts,
+   the landing arrow) transition normally instead of being overridden. */
+.stagger > * {
+  animation: rise 500ms var(--ease-out-expo) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
 }
 
-/* Fade in animation for success messages */
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.letter {
+  display: inline-block;
+  white-space: pre;
+  animation: letter-in 600ms var(--ease-out-expo) backwards;
+  animation-delay: calc(var(--i, 0) * 35ms);
+}
+
+@keyframes soft-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Landing sub-elements arrive after the letters land. */
+.soft-in {
+  animation: soft-in 700ms var(--ease-out-expo) backwards;
+  animation-delay: var(--delay, 0ms);
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -168,7 +265,6 @@ nav button:hover {
   animation: fade-in 300ms ease-out;
 }
 
-/* Fade out and move up animation for thank you popup */
 @keyframes fadeOutUp {
   0% {
     opacity: 1;
@@ -184,33 +280,72 @@ nav button:hover {
   }
 }
 
-/* Music bar animations - each bar has unique pattern for randomness */
+/* -------------------------------------------------------------------------- */
+/*  Music bars                                                                */
+/* -------------------------------------------------------------------------- */
+
 @keyframes musicBar1 {
-  0%, 100% { height: 6px; }
-  25% { height: 18px; }
-  50% { height: 10px; }
-  75% { height: 20px; }
+  0%,
+  100% {
+    height: 6px;
+  }
+  25% {
+    height: 18px;
+  }
+  50% {
+    height: 10px;
+  }
+  75% {
+    height: 20px;
+  }
 }
 
 @keyframes musicBar2 {
-  0%, 100% { height: 14px; }
-  20% { height: 8px; }
-  60% { height: 22px; }
-  80% { height: 12px; }
+  0%,
+  100% {
+    height: 14px;
+  }
+  20% {
+    height: 8px;
+  }
+  60% {
+    height: 22px;
+  }
+  80% {
+    height: 12px;
+  }
 }
 
 @keyframes musicBar3 {
-  0%, 100% { height: 10px; }
-  30% { height: 20px; }
-  50% { height: 6px; }
-  70% { height: 16px; }
+  0%,
+  100% {
+    height: 10px;
+  }
+  30% {
+    height: 20px;
+  }
+  50% {
+    height: 6px;
+  }
+  70% {
+    height: 16px;
+  }
 }
 
 @keyframes musicBar4 {
-  0%, 100% { height: 16px; }
-  35% { height: 10px; }
-  55% { height: 22px; }
-  85% { height: 8px; }
+  0%,
+  100% {
+    height: 16px;
+  }
+  35% {
+    height: 10px;
+  }
+  55% {
+    height: 22px;
+  }
+  85% {
+    height: 8px;
+  }
 }
 
 .animate-music-bar-1 {
@@ -229,19 +364,85 @@ nav button:hover {
   animation: musicBar4 0.9s ease-in-out infinite;
 }
 
-/* Mobile responsive adjustments */
-@media (max-width: 768px) {
-  /* Adjust section content padding for mobile */
-  .section-content {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+/* Half-height variant for the landing and the ambient rail. */
+.bars-sm .animate-music-bar-1,
+.bars-sm .animate-music-bar-2,
+.bars-sm .animate-music-bar-3,
+.bars-sm .animate-music-bar-4 {
+  transform: scaleY(0.55);
+  transform-origin: bottom;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Reduced motion                                                            */
+/* -------------------------------------------------------------------------- */
+
+@keyframes reduced-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes reduced-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Views cross-fade instead of drifting. */
+  .page-content-enter-down,
+  .page-content-enter-up {
+    animation: reduced-in 200ms ease-out both;
   }
 
-  /* Ensure proper spacing for mobile content */
-  .about-content-wrapper {
-    padding-top: 0;
-    padding-bottom: 4rem; /* Extra padding at bottom to avoid social links */
+  .page-content-exit-down,
+  .page-content-exit-up {
+    animation: reduced-out 150ms ease-out both;
+  }
+
+  /* Everything that moved for decoration simply arrives. */
+  .stagger > *,
+  .letter,
+  .soft-in {
+    animation: none;
+  }
+
+  /* Infinite loops stop. The equalizer freezes mid-pattern, which still reads
+     as an equalizer, and the song title carries the information regardless. */
+  .animate-music-bar-1 {
+    animation: none;
+    height: 10px;
+  }
+
+  .animate-music-bar-2 {
+    animation: none;
+    height: 18px;
+  }
+
+  .animate-music-bar-3 {
+    animation: none;
+    height: 8px;
+  }
+
+  .animate-music-bar-4 {
+    animation: none;
+    height: 14px;
+  }
+
+  .animate-spin {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
   }
 }
