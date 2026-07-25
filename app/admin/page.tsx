@@ -10,6 +10,55 @@ interface Recommendation {
   date: string;
 }
 
+interface AppleStatus {
+  connected: boolean;
+  configured: boolean;
+}
+
+// MusicKit JS ships no bundled types, so the global is typed as any.
+declare global {
+  interface Window {
+    MusicKit: any;
+  }
+}
+
+const MUSICKIT_SRC = 'https://js-cdn.music.apple.com/musickit/v3/musickit.js';
+
+// Injects the MusicKit script once and resolves when the global is ready.
+function loadMusicKit(): Promise<any> {
+  return new Promise((resolve, reject) => {
+    if (window.MusicKit) {
+      resolve(window.MusicKit);
+      return;
+    }
+
+    const timer = window.setTimeout(
+      () => reject(new Error('musickit js did not load in time')),
+      15000
+    );
+
+    document.addEventListener(
+      'musickitloaded',
+      () => {
+        window.clearTimeout(timer);
+        resolve(window.MusicKit);
+      },
+      { once: true }
+    );
+
+    if (!document.querySelector(`script[src="${MUSICKIT_SRC}"]`)) {
+      const script = document.createElement('script');
+      script.src = MUSICKIT_SRC;
+      script.async = true;
+      script.onerror = () => {
+        window.clearTimeout(timer);
+        reject(new Error('could not load musickit js'));
+      };
+      document.head.appendChild(script);
+    }
+  });
+}
+
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
@@ -29,12 +78,23 @@ export default function AdminPage() {
   const [titleFocused, setTitleFocused] = useState(false);
   const [urlFocused, setUrlFocused] = useState(false);
 
+  // The apple music endpoints re-check the password on every call, so the
+  // admin password is kept in sessionStorage for the session. Tradeoff: it is
+  // readable by any script on this page, acceptable for a single-user admin.
+  const [adminPassword, setAdminPassword] = useState('');
+  const [appleStatus, setAppleStatus] = useState<AppleStatus | null>(null);
+  const [appleBusy, setAppleBusy] = useState(false);
+  const [appleMessage, setAppleMessage] = useState('');
+
   useEffect(() => {
     // Check if already authenticated in session storage
     const authenticated = sessionStorage.getItem('admin_authenticated');
     if (authenticated === 'true') {
+      const storedPassword = sessionStorage.getItem('admin_password') || '';
       setIsAuthenticated(true);
+      setAdminPassword(storedPassword);
       fetchRecommendations();
+      fetchAppleStatus(storedPassword);
     } else {
       setLoading(false);
     }
@@ -58,9 +118,12 @@ export default function AdminPage() {
 
       if (data.authenticated) {
         sessionStorage.setItem('admin_authenticated', 'true');
+        sessionStorage.setItem('admin_password', password);
         setIsAuthenticated(true);
+        setAdminPassword(password);
         setPassword('');
         fetchRecommendations();
+        fetchAppleStatus(password);
       } else {
         setAuthError('Incorrect password');
       }
@@ -73,10 +136,131 @@ export default function AdminPage() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('admin_authenticated');
+    sessionStorage.removeItem('admin_password');
     setIsAuthenticated(false);
+    setAdminPassword('');
+    setAppleStatus(null);
+    setAppleMessage('');
     setSongRecs([]);
     setWritingRecs([]);
     setBookRecs([]);
+  };
+
+  const fetchAppleStatus = async (pw: string) => {
+    if (!pw) {
+      setAppleMessage('log in again to manage apple music.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/apple-music/connect', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: pw, status: true }),
+      });
+
+      if (!response.ok) {
+        setAppleMessage('could not check apple music status.');
+        return;
+      }
+
+      const data = await response.json();
+      setAppleStatus({
+        connected: Boolean(data.connected),
+        configured: Boolean(data.configured),
+      });
+      setAppleMessage('');
+    } catch (err) {
+      setAppleMessage('could not check apple music status.');
+    }
+  };
+
+  const handleConnectAppleMusic = async () => {
+    setAppleBusy(true);
+    setAppleMessage('opening apple music sign in...');
+
+    try {
+      const tokenResponse = await fetch('/api/apple-music/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: adminPassword }),
+      });
+
+      const tokenData = await tokenResponse.json();
+
+      if (!tokenResponse.ok || !tokenData.developerToken) {
+        setAppleMessage(tokenData.error || 'could not get a developer token.');
+        return;
+      }
+
+      const MusicKit = await loadMusicKit();
+      await MusicKit.configure({
+        developerToken: tokenData.developerToken,
+        app: { name: 'barna marczali', build: '1' },
+      });
+
+      const musicUserToken = await MusicKit.getInstance().authorize();
+
+      if (!musicUserToken) {
+        setAppleMessage('apple music sign in was cancelled.');
+        return;
+      }
+
+      const connectResponse = await fetch('/api/apple-music/connect', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: adminPassword, musicUserToken }),
+      });
+
+      const connectData = await connectResponse.json();
+
+      if (!connectResponse.ok || !connectData.success) {
+        setAppleMessage(connectData.error || 'could not save the apple music token.');
+        return;
+      }
+
+      setAppleStatus({ configured: true, connected: true });
+      setAppleMessage('connected.');
+    } catch (err) {
+      setAppleMessage('apple music connection failed. try again.');
+    } finally {
+      setAppleBusy(false);
+    }
+  };
+
+  const handleDisconnectAppleMusic = async () => {
+    setAppleBusy(true);
+    setAppleMessage('');
+
+    try {
+      const response = await fetch('/api/apple-music/connect', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: adminPassword, disconnect: true }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setAppleMessage(data.error || 'could not disconnect.');
+        return;
+      }
+
+      setAppleStatus({ configured: true, connected: false });
+      setAppleMessage('disconnected.');
+    } catch (err) {
+      setAppleMessage('could not disconnect. try again.');
+    } finally {
+      setAppleBusy(false);
+    }
   };
 
   const fetchRecommendations = async () => {
@@ -430,9 +614,76 @@ export default function AdminPage() {
           </form>
         </div>
 
-        <RecommendationSection 
-          title="song recommendations" 
-          recommendations={songRecs} 
+        {/* Apple Music Connection */}
+        <div className="mb-8 md:mb-12 p-4 md:p-6 rounded-lg" style={{ backgroundColor: 'rgba(229, 143, 101, 0.08)' }}>
+          <h2 className="text-xl md:text-2xl font-light text-brand-accent mb-4 md:mb-6">
+            apple music
+          </h2>
+
+          {appleStatus === null ? (
+            <p className="text-base md:text-lg font-light text-brand-text/80">
+              checking apple music status...
+            </p>
+          ) : !appleStatus.configured ? (
+            <p className="text-base md:text-lg font-light text-brand-text/80">
+              apple music keys not configured on the server. see README for setup.
+            </p>
+          ) : appleStatus.connected ? (
+            <div className="space-y-3 md:space-y-4">
+              <p className="text-base md:text-lg font-light text-brand-text/80">
+                apple music connected. the site now shows your recently played track
+                (updates as songs finish). the manual field above still works as a
+                fallback.
+              </p>
+              <button
+                onClick={handleDisconnectAppleMusic}
+                disabled={appleBusy}
+                className="text-brand-text hover:text-brand-accent transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed font-light text-sm md:text-base"
+              >
+                {appleBusy ? 'disconnecting...' : 'disconnect'}
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-3 md:space-y-4">
+              <p className="text-base md:text-lg font-light text-brand-text/80">
+                connect your apple music account and the site will show what you have
+                been listening to. apple only exposes recently played tracks, so the
+                song changes once each one finishes.
+              </p>
+              <button
+                onClick={handleConnectAppleMusic}
+                disabled={appleBusy || !adminPassword}
+                className="group flex items-center gap-2 text-brand-text hover:text-brand-accent transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed font-light text-base md:text-lg"
+              >
+                <span>{appleBusy ? 'connecting...' : 'connect apple music'}</span>
+                <svg
+                  className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {appleMessage && (
+            <p className="text-brand-accent font-light text-xs md:text-sm mt-3 md:mt-4">
+              {appleMessage}
+            </p>
+          )}
+        </div>
+
+        <RecommendationSection
+          title="song recommendations"
+          recommendations={songRecs}
         />
         
         <RecommendationSection 
