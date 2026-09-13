@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const description =
-  'barna marczali. building scout, studying cs + econ at johns hopkins, playing guitar and football (the real one).';
+  'barna marczali. building scouty, studying cs + econ at johns hopkins, playing guitar and football (the real one).';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://barnamarczali.com'),

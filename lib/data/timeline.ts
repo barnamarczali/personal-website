@@ -9,7 +9,7 @@ export type TimelineEntry = {
 
 /** Shown by default, newest first. */
 export const timeline: TimelineEntry[] = [
-  { year: '2026', role: 'co-founder', org: 'scout', location: 'new york, ny', featured: true },
+  { year: '2026', role: 'co-founder', org: 'scouty', location: 'new york, ny', featured: true },
   { year: '2026', role: 'co-founder, cto/coo', org: 'dayli', location: 'baltimore, md', featured: true },
   { year: '2025', role: 'summer vc intern', org: 'day1 capital', location: 'budapest, hungary', featured: true },
   {

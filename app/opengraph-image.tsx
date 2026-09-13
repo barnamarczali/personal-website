@@ -39,7 +39,7 @@ export default function OpengraphImage() {
         <div
           style={{ display: 'flex', marginTop: '34px', fontSize: 34, fontWeight: 300, color: 'rgba(241,241,231,0.7)' }}
         >
-          building scout, studying cs + econ at johns hopkins,
+          building scouty, studying cs + econ at johns hopkins,
         </div>
         <div style={{ display: 'flex', fontSize: 34, fontWeight: 300, color: 'rgba(241,241,231,0.7)' }}>
           playing more guitar than i should

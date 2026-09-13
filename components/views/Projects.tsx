@@ -30,6 +30,27 @@ function LinkIcons({ links, size = 'w-5 h-5' }: { links: ProjectLink[]; size?: s
   );
 }
 
+/** Vertical, labelled list: order matters when one project has several sites. */
+function StackedLinks({ links }: { links: ProjectLink[] }) {
+  return (
+    <ul className="mt-4 flex flex-col items-start gap-1.5">
+      {links.map((link) => (
+        <li key={link.url}>
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-mono text-xs md:text-sm tracking-wide text-brand-text/70 hover:text-brand-accent transition-colors duration-300"
+          >
+            {link.label}
+            <ExternalIcon className="w-3.5 h-3.5" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article
@@ -62,13 +83,11 @@ export default function Projects() {
           </span>
           <span className="font-mono text-[10px] tracking-wider text-brand-text/45">{featuredProject.period}</span>
         </div>
-        <div className="flex items-start justify-between gap-4 mt-2">
-          <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-brand-text">{featuredProject.title}</h3>
-          <LinkIcons links={featuredProject.links} size="w-6 h-6" />
-        </div>
+        <h3 className="mt-2 text-2xl md:text-3xl font-medium tracking-tight text-brand-text">{featuredProject.title}</h3>
         <p className="mt-3 text-sm md:text-base font-light leading-relaxed text-brand-text/80 max-w-[46ch]">
           {featuredProject.description}
         </p>
+        <StackedLinks links={featuredProject.links} />
       </article>
 
       {projectGroups.map((group, groupIndex) => (

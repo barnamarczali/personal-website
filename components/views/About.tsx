@@ -132,12 +132,12 @@ export default function About() {
           >
             hi! i&apos;m barna, currently building{' '}
             <a
-              href="https://scoutnow.me"
+              href="https://tryscouty.com"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-brand-accent hover:text-brand-accent/75 transition-colors duration-300"
             >
-              scout
+              scouty
             </a>
             , a platform for ugc creator sourcing. before that i co-founded dayli, a social app. i study{' '}
             <span className="font-medium text-brand-text">cs + econ at johns hopkins</span>, spent a semester on

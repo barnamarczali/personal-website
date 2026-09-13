@@ -282,12 +282,12 @@ export default function Page() {
           >
             <NowPlaying song={currentSong} />
             <a
-              href="https://scoutnow.me"
+              href="https://tryscouty.com"
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono text-[11px] tracking-wide text-brand-accent/80 hover:text-brand-accent transition-colors duration-300"
             >
-              building scout
+              building scouty
             </a>
           </aside>
         </div>

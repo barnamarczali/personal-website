@@ -41,12 +41,12 @@ export default function Landing({ onExpand, song }: Props) {
       >
         building{' '}
         <a
-          href="https://scoutnow.me"
+          href="https://tryscouty.com"
           target="_blank"
           rel="noopener noreferrer"
           className="text-brand-accent hover:text-brand-accent/75 transition-colors duration-300"
         >
-          scout
+          scouty
         </a>
         , studying cs + econ at johns hopkins, playing guitar and football (the real one).
       </p>

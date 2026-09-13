@@ -23,13 +23,17 @@ export type ProjectGroup = {
 
 /** The only thing still in progress. Everything below it has shipped or ended. */
 export const featuredProject: Project & { badge: string; period: string } = {
-  slug: 'scout',
-  title: 'scout',
+  slug: 'scouty',
+  title: 'scouty',
   badge: 'currently',
   period: '',
   description:
     'ugc creator sourcing built on trust. hand-picking creators for brands and brands for creators, because finding the right match should be done on a marketplace',
-  links: [{ kind: 'site', url: 'https://scoutnow.me', label: 'visit scout' }],
+  links: [
+    { kind: 'site', url: 'https://tryscouty.com', label: 'tryscouty.com' },
+    { kind: 'site', url: 'https://scoutnow.me', label: 'scoutnow.me' },
+    { kind: 'site', url: 'https://services.scoutnow.me', label: 'services.scoutnow.me' },
+  ],
 };
 
 export const projectGroups: ProjectGroup[] = [
