@@ -22,4 +22,4 @@ export const contactOnlySocials: Social[] = [
 ];
 
 export const EMAIL = 'marczali.barna@gmail.com';
-export const CALENDLY = 'https://calendly.com/marczali-barna/30min';
+export const CALENDLY = 'https://calendly.com/barnamarczali/demo';
